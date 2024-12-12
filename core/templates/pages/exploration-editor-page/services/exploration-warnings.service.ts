@@ -541,6 +541,7 @@ export class ExplorationWarningsService {
     if (Object.keys(this.stateWarnings).length) {
       let errorString =
         Object.keys(this.stateWarnings).length > 1 ? 'cards have' : 'card has';
+        // making changes to reflect warning message instead of keys
       this._warningsList.push({
         type: AppConstants.WARNING_TYPES.ERROR,
         message:
