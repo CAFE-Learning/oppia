@@ -29,6 +29,7 @@ import {Outcome} from 'domain/exploration/OutcomeObjectFactory';
 import {Rule} from 'domain/exploration/rule.model';
 
 import {AppConstants} from 'app.constants';
+import { ItemSelectionRuleInputs } from 'interactions/rule-input-defs';
 
 @Injectable({
   providedIn: 'root',
@@ -230,7 +231,7 @@ export class ItemSelectionInputValidationService {
       const ruleStr = JSON.stringify(rule.toBackendDict());
       if (rulesSet.has(ruleStr)) {
         warningsList.push({
-          type: AppConstants.WARNING_TYPES.ERROR,
+          type: AppConstants.WARNING_TYPES.CRITICAL,
           message:
             `The rule ${ruleIndex} of answer group ` +
             `${answerGroupIndex} of ItemSelectionInput interaction ` +
@@ -281,8 +282,11 @@ export class ItemSelectionInputValidationService {
 
     answerGroups.forEach((answerGroup, answerIndex) => {
       var rules = answerGroup.rules;
+      const arr = this.getWarningsForRulesDuplicates(rules, answerIndex)
+      console.log("Duplicate -> ")
+      console.log(arr)
       warningsList = warningsList.concat(
-        this.getWarningsForRulesDuplicates(rules, answerIndex)
+        arr
       );
 
       rules.forEach((rule, ruleIndex) => {
@@ -295,6 +299,7 @@ export class ItemSelectionInputValidationService {
             answerIndex
           )
         );
+        
 
         if (rule.type === 'IsProperSubsetOf') {
           if (ruleInputs.length < 2) {
@@ -349,6 +354,36 @@ export class ItemSelectionInputValidationService {
         }
       });
     });
+
+    const ruleTypes = new Set(['IsProperSubsetOf', 'Equals', 'ContainsAtLeastOneOf']);
+    const typeToInputMap = new Map<string, Set<string>>();
+    ruleTypes.forEach(type => {
+      typeToInputMap.set(type, new Set());
+    })
+    for(let [answerGroupIndex, group] of answerGroups.entries()){
+      
+      for(let [ruleIndex, rule] of group.rules.entries()) {
+        const itemSelectionInputs = rule.inputs as unknown as ItemSelectionRuleInputs;
+        
+        const inputKey = JSON.stringify([...itemSelectionInputs.x].sort());
+        const inputsSet = typeToInputMap.get(rule.type);
+        console.log("checking duplicates");
+        if(inputsSet.has(inputKey)){
+          console.log("found duplicate");
+          warningsList.push({
+            type: AppConstants.WARNING_TYPES.ERROR,
+            message:
+              `The rule ${ruleIndex + 1} of answer group `  +
+              `${answerGroupIndex + 1} is already present. ` +
+              "Please remove or edit the rule in the answer group to avoid duplicate answer groups. ",
+
+          });
+        }
+        typeToInputMap.get(rule.type).add(inputKey);
+      }
+
+
+    }
 
     return warningsList;
   }

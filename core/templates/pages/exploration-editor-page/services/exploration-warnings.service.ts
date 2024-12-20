@@ -368,6 +368,7 @@ export class ExplorationWarningsService {
             validatorServiceName as keyof typeof INTERACTION_SERVICE_MAPPING
           ]
         );
+        
 
         let interactionWarnings = validatorService.getAllWarnings(
           stateName,
@@ -375,6 +376,11 @@ export class ExplorationWarningsService {
           interaction.answerGroups,
           interaction.defaultOutcome
         );
+        console.log("--------------")
+        console.log("The service is: ")
+        console.log(validatorServiceName)
+        console.log(interactionWarnings)
+        console.log("--------------")
 
         for (let j = 0; j < interactionWarnings.length; j++) {
           _extendStateWarnings(stateName, interactionWarnings[j].message);
@@ -542,15 +548,34 @@ export class ExplorationWarningsService {
       let errorString =
         Object.keys(this.stateWarnings).length > 1 ? 'cards have' : 'card has';
         // making changes to reflect warning message instead of keys
-      this._warningsList.push({
-        type: AppConstants.WARNING_TYPES.ERROR,
-        message:
-          'The following ' +
-          errorString +
-          ' errors: ' +
-          Object.keys(this.stateWarnings).join(', ') +
-          '.',
-      });
+
+        
+      for (const [key, value] of Object.entries(this.stateWarnings)) {
+        const formattedValue = Array.isArray(value) ? value.join(', ') : value; // Join the array with new lines
+        const error = value.length > 1 ?'Errors' : 'Error';
+        this._warningsList.push({
+          type: AppConstants.WARNING_TYPES.ERROR,
+          message: `${error} in ${key} interaction:\n${formattedValue}`,
+        });
+      }
+              
+      
+      // this._warningsList.push({
+      //   type: AppConstants.WARNING_TYPES.ERROR,
+      //   message:
+          
+      //     'The following ' +
+      //     errorString +
+      //     ' errors: ' +
+      //     '\n '+
+      //     Object.entries(this.stateWarnings)
+      //       .map(([key, value]) => `${key}: ${value}`)
+      //       .join('\n')
+      //       +
+      //       '.',
+      //     // Object.keys(this.stateWarnings).join(', ') +
+      //     // '.',
+      // });
     }
 
     let statesWithAnswerGroupsWithEmptyClassifiers =
