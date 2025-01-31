@@ -39,6 +39,8 @@ export class ItemSelectionInputValidationService {
     private baseInteractionValidationServiceInstance: baseInteractionValidationService
   ) {}
 
+  rulesSet = new Set<string>();
+
   getCustomizationArgsWarnings(
     customizationArgs: ItemSelectionInputCustomizationArgs
   ): Warning[] {
@@ -226,10 +228,9 @@ export class ItemSelectionInputValidationService {
     answerGroupIndex: number
   ): Warning[] {
     const warningsList: Warning[] = [];
-    const rulesSet = new Set<string>();
     rules.forEach((rule, ruleIndex) => {
       const ruleStr = JSON.stringify(rule.toBackendDict());
-      if (rulesSet.has(ruleStr)) {
+      if (this.rulesSet.has(ruleStr)) {
         warningsList.push({
           type: AppConstants.WARNING_TYPES.CRITICAL,
           message:
@@ -238,7 +239,7 @@ export class ItemSelectionInputValidationService {
             'is a duplicate.',
         });
       }
-      rulesSet.add(ruleStr);
+      this.rulesSet.add(ruleStr);
     });
     return warningsList;
   }
@@ -279,7 +280,7 @@ export class ItemSelectionInputValidationService {
     const choicesContentIds = new Set(
       customizationArgs.choices.value.map(choice => choice.contentId)
     );
-
+    this.rulesSet.clear();
     answerGroups.forEach((answerGroup, answerIndex) => {
       var rules = answerGroup.rules;
       const arr = this.getWarningsForRulesDuplicates(rules, answerIndex);

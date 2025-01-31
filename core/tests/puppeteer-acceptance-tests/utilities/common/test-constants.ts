@@ -53,8 +53,6 @@ export default {
     Donate: 'http://localhost:8181/donate',
     DonatePageThanksModalURL: 'http://localhost:8181/donate?thanks=',
     AboutPageThanksModalURL: 'http://localhost:8181/about?thanks=',
-    DesktopExternalLinkWatchAVideo:
-      'https://www.facebook.com/oppiaorg/videos/189487953721583/',
     EmbeddingAnExploration: 'https://oppia.github.io/#/EmbeddingAnExploration',
     ExplorationDesignTips: 'http://oppia.github.io/#/DesignTips',
     ExternalLink61MillionChildren:
@@ -75,8 +73,6 @@ export default {
     Login: 'http://localhost:8181/login',
     Logout: 'http://localhost:8181/logout',
     MathClassroom: 'http://localhost:8181/learn/math',
-    MobileExternalLinkWatchAVideo:
-      'https://m.facebook.com/watch/?v=189487953721583&vanity=oppiaorg',
     ModeratorPage: 'http://localhost:8181/moderator',
     Partnerships: 'http://localhost:8181/partnerships',
     PartnershipsBrochure:
@@ -126,6 +122,7 @@ export default {
       'https://drive.google.com/file/d/1gMixZ2c0j5XAGPx4qDBDvRgiFvF6PMkk/view',
     LessonCreatorLinkedInUrl:
       'https://www.linkedin.com/in/rita-santos-guimaraes-prof-matematica/',
+    ReadBlogLink: 'https://medium.com/oppia-org',
   },
   Dashboard: {
     MainDashboard: '.e2e-test-splash-page',
@@ -161,7 +158,7 @@ export default {
   data: {
     blogPostThumbnailImage: path.resolve(
       __dirname,
-      '../../data/blog-post-thumbnail.svg'
+      '../../data/blog-post-thumbnail.png'
     ),
     curriculumAdminThumbnailImage: path.resolve(
       __dirname,
@@ -185,6 +182,22 @@ export default {
       '../../data/last-card-hi.mp3'
     ),
   },
+  SocialsShare: {
+    Facebook: {
+      Domain:
+        'https://www.facebook.com/sharer/sharer.php?sdk=joey&u=http://localhost:8181/explore/',
+      queryString: '&display=popup&ref=plugin&src=share_button',
+    },
+    Twitter: {
+      Domain:
+        'https://twitter.com/share?text=Check%20out%20this%20interactive%20lesson%20on%20Oppia%20-%20a%20free%20platform%20for%20teaching%20and%20learning!&url=http://localhost:8181/explore/',
+    },
+    Classroom: {
+      Domain:
+        'https://classroom.google.com/share?url=http://localhost:8181/explore/',
+    },
+  },
+
   OppiaSocials: {
     YouTube: {
       Domain: 'youtube.com',
