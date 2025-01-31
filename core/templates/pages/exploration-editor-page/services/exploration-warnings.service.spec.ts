@@ -504,7 +504,13 @@ describe('Exploration Warnings Service', () => {
       },
       {
         type: 'error',
-        message: 'The following card has errors: Hola.',
+        message:
+          'Errors in Hola interaction: \n' +
+          'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.' +
+          "There's no way to complete the exploration starting from" +
+          ' this card. To fix this, make sure that the last card in' +
+          " the chain starting from this one has an 'End Exploration'" +
+          ' question type.',
       },
       {
         type: 'error',
@@ -637,7 +643,13 @@ describe('Exploration Warnings Service', () => {
       },
       {
         type: 'error',
-        message: 'The following card has errors: Hola.',
+        message:
+          'Errors in Hola interaction: \n' +
+          'Placeholder text must be a string., Number of rows must be integral., There is an answer among the top 10 which has no explicit, The current solution does not lead to another card.' +
+          "There's no way to complete the exploration starting from" +
+          ' this card. To fix this, make sure that the last card in' +
+          " the chain starting from this one has an 'End Exploration'" +
+          ' question type.',
       },
       {
         type: 'error',
@@ -761,7 +773,13 @@ describe('Exploration Warnings Service', () => {
         },
         {
           type: 'error',
-          message: 'The following card has errors: Hola.',
+          message:
+            'Errors in Hola interaction: \n' +
+            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.' +
+            "There's no way to complete the exploration starting from" +
+            ' this card. To fix this, make sure that the last card in' +
+            " the chain starting from this one has an 'End Exploration'" +
+            ' question type.',
         },
         {
           type: 'error',
