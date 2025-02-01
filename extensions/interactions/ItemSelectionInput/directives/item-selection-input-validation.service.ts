@@ -284,10 +284,7 @@ export class ItemSelectionInputValidationService {
     answerGroups.forEach((answerGroup, answerIndex) => {
       var rules = answerGroup.rules;
       const arr = this.getWarningsForRulesDuplicates(rules, answerIndex);
-      console.log('Duplicate -> ');
-      console.log(arr);
       warningsList = warningsList.concat(arr);
-
       rules.forEach((rule, ruleIndex) => {
         const ruleInputs = rule.inputs.x as string[];
         warningsList = warningsList.concat(
@@ -352,7 +349,6 @@ export class ItemSelectionInputValidationService {
         }
       });
     });
-    //new additions
     const ruleTypes = new Set([
       'IsProperSubsetOf',
       'Equals',
@@ -369,9 +365,7 @@ export class ItemSelectionInputValidationService {
           rule.inputs as unknown as ItemSelectionRuleInputs;
         const input = JSON.stringify([...itemSelectionInputs.x].sort());
         const inputsSet = typeToInputMap.get(rule.type) || new Set();
-        console.log('checking duplicates');
         if (inputsSet.has(input)) {
-          console.log('found duplicate');
           warningsList.push({
             type: AppConstants.WARNING_TYPES.ERROR,
             message:

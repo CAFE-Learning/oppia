@@ -538,35 +538,14 @@ export class ExplorationWarningsService {
     }
 
     if (Object.keys(this.stateWarnings).length) {
-      let errorString =
-        Object.keys(this.stateWarnings).length > 1 ? 'cards have' : 'card has';
-      // making changes to reflect warning message instead of keys
-
       for (const [key, value] of Object.entries(this.stateWarnings)) {
-        const formattedValue = Array.isArray(value) ? value.join(', ') : value; // Join the array with new lines
+        const formattedValue = Array.isArray(value) ? value.join(', ') : value;
         const error = value.length > 1 ? 'Errors' : 'Error';
         this._warningsList.push({
           type: AppConstants.WARNING_TYPES.ERROR,
           message: `${error} in ${key} interaction:\n${formattedValue}`,
         });
       }
-
-      // this._warningsList.push({
-      //   type: AppConstants.WARNING_TYPES.ERROR,
-      //   message:
-
-      //     'The following ' +
-      //     errorString +
-      //     ' errors: ' +
-      //     '\n '+
-      //     Object.entries(this.stateWarnings)
-      //       .map(([key, value]) => `${key}: ${value}`)
-      //       .join('\n')
-      //       +
-      //       '.',
-      //     // Object.keys(this.stateWarnings).join(', ') +
-      //     // '.',
-      // });
     }
 
     let statesWithAnswerGroupsWithEmptyClassifiers =
