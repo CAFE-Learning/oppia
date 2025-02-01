@@ -352,7 +352,7 @@ export class ItemSelectionInputValidationService {
         }
       });
     });
-
+    //new additions
     const ruleTypes = new Set([
       'IsProperSubsetOf',
       'Equals',
