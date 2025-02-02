@@ -370,13 +370,12 @@ export class ItemSelectionInputValidationService {
             type: AppConstants.WARNING_TYPES.ERROR,
             message:
               `The rule ${ruleIndex + 1} of answer group ` +
-              `${answerGroupIndex + 1} is already present in answer group ${ruleToAnswerGroup.get(input) + 1}. ` +
+              `${answerGroupIndex + 1} is already present in answer group ${(ruleToAnswerGroup.get(input) ?? 0) + 1}. ` +
               'Please remove or edit the rule in the answer group to avoid duplicate rules. ',
           });
         }
-        if (typeToInputMap.has(rule.type)) {
-          typeToInputMap.get(rule.type).add(input);
-        }
+
+        (typeToInputMap.get(rule.type) || new Set()).add(input);
         ruleToAnswerGroup.set(input, answerGroupIndex);
       }
     }
