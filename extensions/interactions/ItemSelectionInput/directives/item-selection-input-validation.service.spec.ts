@@ -802,47 +802,52 @@ describe('ItemSelectionInputValidationService', () => {
     }
   );
 
-  // Comment it('should warn about duplicated rules', () => {
-  //   const answerGroups = [
-  //     agof.createNew(
-  //       [
-  //         Rule.createFromBackendDict(
-  //           {
-  //             rule_type: 'Equals',
-  //             inputs: {
-  //               x: ['ca_0'],
-  //             },
-  //           },
-  //           'ItemSelectionInput'
-  //         ),
-  //         Rule.createFromBackendDict(
-  //           {
-  //             rule_type: 'Equals',
-  //             inputs: {
-  //               x: ['ca_0'],
-  //             },
-  //           },
-  //           'ItemSelectionInput'
-  //         ),
-  //       ],
-  //       goodDefaultOutcome,
-  //       [],
-  //       null
-  //     ),
-  //   ];
-  //   const warnings = validatorService.getAllWarnings(
-  //     currentState,
-  //     customizationArguments,
-  //     answerGroups,
-  //     goodDefaultOutcome
-  //   );
-  //   expect(warnings).toEqual([
-  //     {
-  //       type: WARNING_TYPES.ERROR,
-  //       message:
-  //         'The rule 1 of answer group 0 of ItemSelectionInput interaction ' +
-  //         'is a duplicate.',
-  //     },
-  //   ]);
-  // });
+  it('should warn about duplicated rules', () => {
+    const answerGroups = [
+      agof.createNew(
+        [
+          Rule.createFromBackendDict(
+            {
+              rule_type: 'Equals',
+              inputs: {
+                x: ['ca_0'],
+              },
+            },
+            'ItemSelectionInput'
+          ),
+          Rule.createFromBackendDict(
+            {
+              rule_type: 'Equals',
+              inputs: {
+                x: ['ca_0'],
+              },
+            },
+            'ItemSelectionInput'
+          ),
+        ],
+        goodDefaultOutcome,
+        [],
+        null
+      ),
+    ];
+    const warnings = validatorService.getAllWarnings(
+      currentState,
+      customizationArguments,
+      answerGroups,
+      goodDefaultOutcome
+    );
+    expect(warnings).toEqual([
+      {
+        type: WARNING_TYPES.CRITICAL,
+        message:
+          'The rule 1 of answer group 0 of ItemSelectionInput interaction ' +
+          'is a duplicate.',
+      },
+      {
+        type: WARNING_TYPES.ERROR,
+        message:
+          'The rule 2 of answer group 1 is already present in answer group 1. Please remove or edit the rule in the answer group to avoid duplicate rules. ',
+      },
+    ]);
+  });
 });
