@@ -802,7 +802,7 @@ describe('ItemSelectionInputValidationService', () => {
     }
   );
 
-  // it('should warn about duplicated rules', () => {
+  // Comment it('should warn about duplicated rules', () => {
   //   const answerGroups = [
   //     agof.createNew(
   //       [
