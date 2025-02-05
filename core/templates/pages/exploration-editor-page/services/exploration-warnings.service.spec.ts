@@ -189,7 +189,13 @@ describe('Exploration Warnings Service', () => {
       },
       {
         type: 'error',
-        message: 'The following card has errors: Hola.',
+        message:
+          'Errors in Hola interaction: \n' +
+          'Placeholder text must be a string., Number of rows must be integral., ' +
+          "There's no way to complete the exploration starting from" +
+          ' this card. To fix this, make sure that the last card in' +
+          " the chain starting from this one has an 'End Exploration'" +
+          ' question type.',
       },
       {
         type: 'error',
@@ -316,7 +322,13 @@ describe('Exploration Warnings Service', () => {
       },
       {
         type: 'error',
-        message: 'The following card has errors: Hola.',
+        message:
+          'Errors in Hola interaction: \n' +
+          'The button text should not be empty., Only the default outcome is necessary for a continue interaction., ' +
+          "There's no way to complete the exploration starting from" +
+          ' this card. To fix this, make sure that the last card in' +
+          " the chain starting from this one has an 'End Exploration'" +
+          ' question type.',
       },
       {
         type: 'error',
@@ -395,7 +407,13 @@ describe('Exploration Warnings Service', () => {
       },
       {
         type: 'error',
-        message: 'The following card has errors: Hola.',
+        message:
+          'Errors in Hola interaction: \n' +
+          'Please add an interaction to this card., ' +
+          "There's no way to complete the exploration starting from" +
+          ' this card. To fix this, make sure that the last card in' +
+          " the chain starting from this one has an 'End Exploration'" +
+          ' question type.',
       },
     ]);
     expect(explorationWarningsService.countWarnings()).toBe(3);
@@ -506,7 +524,7 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.' +
+          'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card., ' +
           "There's no way to complete the exploration starting from" +
           ' this card. To fix this, make sure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
@@ -645,7 +663,7 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Placeholder text must be a string., Number of rows must be integral., There is an answer among the top 10 which has no explicit, The current solution does not lead to another card.' +
+          'Placeholder text must be a string., Number of rows must be integral., There is an answer among the top 10 which has no explicit feedback., The current solution does not lead to another card., ' +
           "There's no way to complete the exploration starting from" +
           ' this card. To fix this, make sure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
@@ -775,7 +793,7 @@ describe('Exploration Warnings Service', () => {
           type: 'error',
           message:
             'Errors in Hola interaction: \n' +
-            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.' +
+            'Placeholder text must be a string., Number of rows must be integral., ' +
             "There's no way to complete the exploration starting from" +
             ' this card. To fix this, make sure that the last card in' +
             " the chain starting from this one has an 'End Exploration'" +
@@ -966,7 +984,15 @@ describe('Exploration Warnings Service', () => {
         },
         {
           type: 'error',
-          message: 'The following cards have errors: Hola, State.',
+          message:
+            'Errors in Hola interaction: \n' +
+            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.',
+        },
+        {
+          type: 'error',
+          message:
+            'Errors in State interaction: \n' +
+            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card., This card is unreachable.',
         },
         {
           type: 'error',
@@ -981,7 +1007,7 @@ describe('Exploration Warnings Service', () => {
             ' with no training data: 0',
         },
       ]);
-      expect(explorationWarningsService.countWarnings()).toBe(5);
+      expect(explorationWarningsService.countWarnings()).toBe(6);
       expect(explorationWarningsService.hasCriticalWarnings()).toBe(true);
       expect(explorationWarningsService.getAllStateRelatedWarnings()).toEqual({
         Hola: [
@@ -1201,7 +1227,7 @@ describe('Exploration Warnings Service', () => {
     );
 
     explorationWarningsService.updateWarnings();
-    expect(explorationWarningsService.countWarnings()).toBe(5);
+    expect(explorationWarningsService.countWarnings()).toBe(6);
     expect(explorationWarningsService.hasCriticalWarnings()).toBe(true);
     expect(explorationWarningsService.getAllStateRelatedWarnings()).toEqual({
       Hola: [
@@ -1715,7 +1741,7 @@ describe('Exploration Warnings Service', () => {
       );
 
       explorationWarningsService.updateWarnings();
-      expect(explorationWarningsService.countWarnings()).toBe(13);
+      expect(explorationWarningsService.countWarnings()).toBe(21);
       expect(explorationWarningsService.hasCriticalWarnings()).toBe(true);
       expect(explorationWarningsService.getCheckpointCountWarning()).toEqual(
         'Only a maximum of 8 checkpoints are allowed per lesson.'
@@ -2275,7 +2301,7 @@ describe('Exploration Warnings Service', () => {
       );
 
       explorationWarningsService.updateWarnings();
-      expect(explorationWarningsService.countWarnings()).toBe(12);
+      expect(explorationWarningsService.countWarnings()).toBe(20);
       expect(explorationWarningsService.hasCriticalWarnings()).toBe(true);
       expect(explorationWarningsService.getAllStateRelatedWarnings()).toEqual({
         Hola: [

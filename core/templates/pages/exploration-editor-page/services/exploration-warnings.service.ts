@@ -539,11 +539,11 @@ export class ExplorationWarningsService {
 
     if (Object.keys(this.stateWarnings).length) {
       for (const [key, value] of Object.entries(this.stateWarnings)) {
-        const formattedValue = Array.isArray(value) ? value.join(', ') : value;
+        const formattedValue = Array.isArray(value) ? value.join(', ') : value; // explanation for the errors
         const error = value.length > 1 ? 'Errors' : 'Error';
         this._warningsList.push({
           type: AppConstants.WARNING_TYPES.ERROR,
-          message: `${error} in ${key} interaction:\n${formattedValue}`,
+          message: `${error} in ${key} interaction: \n${formattedValue}`,
         });
       }
     }
