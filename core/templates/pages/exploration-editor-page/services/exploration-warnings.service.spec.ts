@@ -191,9 +191,9 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Placeholder text must be a string., Number of rows must be integral., ' +
+          'Placeholder text must be a string; Number of rows must be integral; ' +
           "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       },
@@ -211,7 +211,7 @@ describe('Exploration Warnings Service', () => {
         'Placeholder text must be a string.',
         'Number of rows must be integral.',
         "There's no way to complete the exploration starting from this" +
-          ' card. To fix this, make sure that the last card in the chain' +
+          ' card -- ensure that the last card in the chain' +
           " starting from this one has an 'End Exploration' question type.",
       ],
     });
@@ -324,9 +324,9 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'The button text should not be empty., Only the default outcome is necessary for a continue interaction., ' +
+          'The button text should not be empty; Only the default outcome is necessary for a continue interaction; ' +
           "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       },
@@ -344,7 +344,7 @@ describe('Exploration Warnings Service', () => {
         'The button text should not be empty.',
         'Only the default outcome is necessary for a continue interaction.',
         "There's no way to complete the exploration starting from this" +
-          ' card. To fix this, make sure that the last card in the chain' +
+          ' card -- ensure that the last card in the chain' +
           " starting from this one has an 'End Exploration' question type.",
       ],
     });
@@ -409,9 +409,9 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Please add an interaction to this card., ' +
+          'Please add an interaction to this card; ' +
           "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       },
@@ -422,7 +422,7 @@ describe('Exploration Warnings Service', () => {
       Hola: [
         'Please add an interaction to this card.',
         "There's no way to complete the exploration starting from this" +
-          ' card. To fix this, make sure that the last card in the chain' +
+          ' card -- ensure that the last card in the chain' +
           " starting from this one has an 'End Exploration' question type.",
       ],
     });
@@ -524,9 +524,9 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card., ' +
+          'Placeholder text must be a string; Number of rows must be integral; The current solution does not lead to another card; ' +
           "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       },
@@ -545,7 +545,7 @@ describe('Exploration Warnings Service', () => {
         'Number of rows must be integral.',
         'The current solution does not lead to another card.',
         "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       ],
@@ -663,9 +663,9 @@ describe('Exploration Warnings Service', () => {
         type: 'error',
         message:
           'Errors in Hola interaction: \n' +
-          'Placeholder text must be a string., Number of rows must be integral., There is an answer among the top 10 which has no explicit feedback., The current solution does not lead to another card., ' +
+          'Placeholder text must be a string; Number of rows must be integral; There is an answer among the top 10 which has no explicit feedback; The current solution does not lead to another card; ' +
           "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       },
@@ -686,7 +686,7 @@ describe('Exploration Warnings Service', () => {
           ' feedback.',
         'The current solution does not lead to another card.',
         "There's no way to complete the exploration starting from" +
-          ' this card. To fix this, make sure that the last card in' +
+          ' this card -- ensure that the last card in' +
           " the chain starting from this one has an 'End Exploration'" +
           ' question type.',
       ],
@@ -793,9 +793,9 @@ describe('Exploration Warnings Service', () => {
           type: 'error',
           message:
             'Errors in Hola interaction: \n' +
-            'Placeholder text must be a string., Number of rows must be integral., ' +
+            'Placeholder text must be a string; Number of rows must be integral; ' +
             "There's no way to complete the exploration starting from" +
-            ' this card. To fix this, make sure that the last card in' +
+            ' this card -- ensure that the last card in' +
             " the chain starting from this one has an 'End Exploration'" +
             ' question type.',
         },
@@ -813,7 +813,7 @@ describe('Exploration Warnings Service', () => {
           'Placeholder text must be a string.',
           'Number of rows must be integral.',
           "There's no way to complete the exploration starting from this" +
-            ' card. To fix this, make sure that the last card in the chain' +
+            ' card -- ensure that the last card in the chain' +
             " starting from this one has an 'End Exploration' question type.",
         ],
       });
@@ -986,13 +986,13 @@ describe('Exploration Warnings Service', () => {
           type: 'error',
           message:
             'Errors in Hola interaction: \n' +
-            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card.',
+            'Placeholder text must be a string; Number of rows must be integral; The current solution does not lead to another card.',
         },
         {
           type: 'error',
           message:
             'Errors in State interaction: \n' +
-            'Placeholder text must be a string., Number of rows must be integral., The current solution does not lead to another card., This card is unreachable.',
+            'Placeholder text must be a string; Number of rows must be integral; The current solution does not lead to another card; This card is unreachable.',
         },
         {
           type: 'error',
@@ -1102,7 +1102,7 @@ describe('Exploration Warnings Service', () => {
         'Placeholder text must be a string.',
         'Number of rows must be integral.',
         "There's no way to complete the exploration starting from this" +
-          ' card. To fix this, make sure that the last card in the chain' +
+          ' card -- ensure that the last card in the chain' +
           " starting from this one has an 'End Exploration' question type.",
         'The first card of the lesson must be a checkpoint.',
       ],

@@ -838,15 +838,9 @@ describe('ItemSelectionInputValidationService', () => {
     );
     expect(warnings).toEqual([
       {
-        type: WARNING_TYPES.CRITICAL,
-        message:
-          'The rule 1 of answer group 0 of ItemSelectionInput interaction ' +
-          'is a duplicate.',
-      },
-      {
         type: WARNING_TYPES.ERROR,
         message:
-          'The rule 2 of answer group 1 is already present in answer group 1. Please remove or edit the rule in the answer group to avoid duplicate rules. ',
+          'The rule 2 of answer group 1 is already present in answer group 1 -- please remove or edit the rule in the answer group to avoid duplicate rules.',
       },
     ]);
   });

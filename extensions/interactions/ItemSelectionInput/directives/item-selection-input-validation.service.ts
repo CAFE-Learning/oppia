@@ -223,26 +223,26 @@ export class ItemSelectionInputValidationService {
     return warningsList;
   }
 
-  private getWarningsForRulesDuplicates(
-    rules: Rule[],
-    answerGroupIndex: number
-  ): Warning[] {
-    const warningsList: Warning[] = [];
-    rules.forEach((rule, ruleIndex) => {
-      const ruleStr = JSON.stringify(rule.toBackendDict());
-      if (this.rulesSet.has(ruleStr)) {
-        warningsList.push({
-          type: AppConstants.WARNING_TYPES.CRITICAL,
-          message:
-            `The rule ${ruleIndex} of answer group ` +
-            `${answerGroupIndex} of ItemSelectionInput interaction ` +
-            'is a duplicate.',
-        });
-      }
-      this.rulesSet.add(ruleStr);
-    });
-    return warningsList;
-  }
+  // private getWarningsForRulesDuplicates(
+  //   rules: Rule[],
+  //   answerGroupIndex: number
+  // ): Warning[] {
+  //   const warningsList: Warning[] = [];
+  //   // rules.forEach((rule, ruleIndex) => {
+  //   //   const ruleStr = JSON.stringify(rule.toBackendDict());
+  //   //   if (this.rulesSet.has(ruleStr)) {
+  //   //     warningsList.push({
+  //   //       type: AppConstants.WARNING_TYPES.CRITICAL,
+  //   //       message:
+  //   //         `The rule ${ruleIndex} of answer group ` +
+  //   //         `${answerGroupIndex} of ItemSelectionInput interaction ` +
+  //   //         'is a duplicate.',
+  //   //     });
+  //   //   }
+  //   //   this.rulesSet.add(ruleStr);
+  //   // });
+  //   return warningsList;
+  // }
 
   getAllWarnings(
     stateName: string,
@@ -283,8 +283,8 @@ export class ItemSelectionInputValidationService {
     this.rulesSet.clear();
     answerGroups.forEach((answerGroup, answerIndex) => {
       var rules = answerGroup.rules;
-      const arr = this.getWarningsForRulesDuplicates(rules, answerIndex);
-      warningsList = warningsList.concat(arr);
+      //const arr = this.getWarningsForRulesDuplicates(rules, answerIndex);
+      //warningsList = warningsList.concat(arr);
       rules.forEach((rule, ruleIndex) => {
         const ruleInputs = rule.inputs.x as string[];
         warningsList = warningsList.concat(
@@ -370,8 +370,8 @@ export class ItemSelectionInputValidationService {
             type: AppConstants.WARNING_TYPES.ERROR,
             message:
               `The rule ${ruleIndex + 1} of answer group ` +
-              `${answerGroupIndex + 1} is already present in answer group ${(ruleToAnswerGroup.get(input) ?? 0) + 1}. ` +
-              'Please remove or edit the rule in the answer group to avoid duplicate rules. ',
+              `${answerGroupIndex + 1} is already present in answer group ${(ruleToAnswerGroup.get(input) ?? 0) + 1} -- ` +
+              'please remove or edit the rule in the answer group to avoid duplicate rules.',
           });
         }
 
