@@ -223,27 +223,6 @@ export class ItemSelectionInputValidationService {
     return warningsList;
   }
 
-  // private getWarningsForRulesDuplicates(
-  //   rules: Rule[],
-  //   answerGroupIndex: number
-  // ): Warning[] {
-  //   const warningsList: Warning[] = [];
-  //   // rules.forEach((rule, ruleIndex) => {
-  //   //   const ruleStr = JSON.stringify(rule.toBackendDict());
-  //   //   if (this.rulesSet.has(ruleStr)) {
-  //   //     warningsList.push({
-  //   //       type: AppConstants.WARNING_TYPES.CRITICAL,
-  //   //       message:
-  //   //         `The rule ${ruleIndex} of answer group ` +
-  //   //         `${answerGroupIndex} of ItemSelectionInput interaction ` +
-  //   //         'is a duplicate.',
-  //   //     });
-  //   //   }
-  //   //   this.rulesSet.add(ruleStr);
-  //   // });
-  //   return warningsList;
-  // }
-
   getAllWarnings(
     stateName: string,
     customizationArgs: ItemSelectionInputCustomizationArgs,
@@ -283,8 +262,6 @@ export class ItemSelectionInputValidationService {
     this.rulesSet.clear();
     answerGroups.forEach((answerGroup, answerIndex) => {
       var rules = answerGroup.rules;
-      //const arr = this.getWarningsForRulesDuplicates(rules, answerIndex);
-      //warningsList = warningsList.concat(arr);
       rules.forEach((rule, ruleIndex) => {
         const ruleInputs = rule.inputs.x as string[];
         warningsList = warningsList.concat(
