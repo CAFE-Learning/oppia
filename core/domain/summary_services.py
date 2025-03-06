@@ -721,16 +721,19 @@ def require_activities_to_be_public(
             collection_ids),
     }]
 
+    print(activity_summaries_by_type)
+
+    dne_ids = []
+    private_ids = []
+
     for activities_info in activity_summaries_by_type:
         for index, summary in enumerate(activities_info['summaries']):
             if summary is None:
-                raise Exception(
-                    'Cannot feature non-existent %s with id %s' %
-                    (activities_info['type'], activities_info['ids'][index]))
-            if summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
-                raise Exception(
-                    'Cannot feature private %s with id %s' %
-                    (activities_info['type'], activities_info['ids'][index]))
+                dne_ids.append(activities_info['ids'][index])
+            elif summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
+                private_ids.append(activities_info['ids'][index])
+
+    return dne_ids, private_ids
 
 
 def get_featured_activity_summary_dicts(

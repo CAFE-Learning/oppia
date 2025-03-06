@@ -83,6 +83,7 @@ export class ModeratorPageComponent {
     if (this.displayedFeaturedActivityReferences !== newValue) {
       this.displayedFeaturedActivityReferences = newValue;
       this.changeDetectorRef.detectChanges();
+      console.log(newValue);
     }
   }
 
@@ -146,10 +147,13 @@ export class ModeratorPageComponent {
   }
 
   isSaveFeaturedActivitiesButtonDisabled(): boolean {
-    return isEqual(
-      this.displayedFeaturedActivityReferences,
-      this.lastSavedFeaturedActivityReferences
-    );
+    for (let reference of this.displayedFeaturedActivityReferences) {
+      if (reference.id.trim() === '') {
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
 
   saveFeaturedActivityReferences(): void {

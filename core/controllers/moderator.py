@@ -78,15 +78,36 @@ class FeaturedActivitiesHandler(
             'featured_activity_reference_dicts']
 
         try:
-            summary_services.require_activities_to_be_public(
-                featured_activity_references)
+            dne_ids = summary_services.require_activities_to_be_public(
+                featured_activity_references)[0]
+            private_ids = summary_services.require_activities_to_be_public(
+                featured_activity_references)[1]
+
+            if ((dne_ids == []) & (private_ids == [])):
+                activity_services.update_featured_activity_references(
+                    featured_activity_references)
+                self.render_json({})
+            else:
+
+                error_message = ""
+
+                if dne_ids:
+                    for id in dne_ids:
+                        error = "These IDs do not exist: " + ", ".join(dne_ids) + ". "
+                    error_message = error_message + error
+                if private_ids:
+                    for id in private_ids:
+                        error = "These IDs are private: " + ", ".join(private_ids) + ". "
+                    error_message = error_message + error
+
+                error_message = error_message + "Please try a different ID."
+
+                raise self.InvalidInputException(error_message)
+
         except Exception as e:
             raise self.InvalidInputException(e)
 
-        activity_services.update_featured_activity_references(
-            featured_activity_references)
-
-        self.render_json({})
+        
 
 
 class EmailDraftHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
