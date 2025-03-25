@@ -32,7 +32,7 @@ export interface Warning {
   providedIn: 'root',
 })
 export class baseInteractionValidationService {
-  // 'argNames' is an array of top-level customization argument names (such
+  // 'argNames' is an arrays of top-level customization argument names (such
   // as 'chocies') used to verify the basic structure of the input
   // customization arguments object.
   requireCustomizationArguments(
