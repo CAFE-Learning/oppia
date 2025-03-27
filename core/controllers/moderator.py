@@ -78,12 +78,19 @@ class FeaturedActivitiesHandler(
             'featured_activity_reference_dicts']
 
         try:
-            dne_ids = summary_services.require_activities_to_be_public(
+            #Retrieve the list for each type of inavlid ID
+            dne_explorations = summary_services.require_activities_to_be_public(
                 featured_activity_references)[0]
-            private_ids = summary_services.require_activities_to_be_public(
+            dne_collections = summary_services.require_activities_to_be_public(
                 featured_activity_references)[1]
+            private_explorations = summary_services.require_activities_to_be_public(
+                featured_activity_references)[2]
+            private_collections = summary_services.require_activities_to_be_public(
+                featured_activity_references)[3]
 
-            if ((dne_ids == []) & (private_ids == [])):
+            #If all of the lists are empty, there are no invalid IDs
+            if ((dne_explorations == []) & (dne_collections == []) & 
+                (private_explorations == []) & (private_collections == [])):
                 activity_services.update_featured_activity_references(
                     featured_activity_references)
                 self.render_json({})
@@ -91,16 +98,31 @@ class FeaturedActivitiesHandler(
 
                 error_message = ""
 
-                if dne_ids:
-                    for id in dne_ids:
-                        error = "These IDs do not exist: " + ", ".join(dne_ids) + ". "
-                    error_message = error_message + error
-                if private_ids:
-                    for id in private_ids:
-                        error = "These IDs are private: " + ", ".join(private_ids) + ". "
+                #If there are IDs for non-existent Explorations
+                if dne_explorations:
+                    for id in dne_explorations:
+                        error = "These Exploration IDs do not exist: " + ", ".join(dne_explorations) + ". "
                     error_message = error_message + error
 
-                error_message = error_message + "Please try a different ID."
+                #If there are IDs for non-existent Collections
+                if dne_collections:
+                    for id in dne_collections:
+                        error = "These Collection IDs do not exist: " + ", ".join(dne_collections) + ". "
+                    error_message = error_message + error
+                
+                #If there are IDs for private Explorations
+                if private_explorations:
+                    for id in private_explorations:
+                        error = "These Exploration IDs are private: " + ", ".join(private_explorations) + ". "
+                    error_message = error_message + error
+
+                #If there are IDs for private Collections
+                if private_collections:
+                    for id in private_collections:
+                        error = "These Collection IDs are private: " + ", ".join(private_collections) + ". "
+                    error_message = error_message + error
+
+                error_message = error_message + "Please enter a different ID."
 
                 raise self.InvalidInputException(error_message)
 

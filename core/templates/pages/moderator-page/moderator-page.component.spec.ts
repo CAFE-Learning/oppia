@@ -254,4 +254,70 @@ describe('Moderator Page Component', () => {
       newValue
     );
   });
+
+  it('should show appropriate error message for each type of invalid id', fakeAsync(() => {
+    let newValue1: ActivityIdTypeDict = [
+      {
+        id: 'dne_exploration',
+        type: 'exploration',
+      },
+    ];
+
+    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
+
+    componentInstance.saveFeaturedActivityReferences();
+
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
+    );
+
+    let newValue2: ActivityIdTypeDict = [
+      {
+        id: 'dne_collection',
+        type: 'collection',
+      },
+    ];
+
+    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences(newValue2);
+
+    componentInstance.saveFeaturedActivityReferences();
+
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Collection IDs do not exist: dne_collection. Please enter a different ID.'
+    );
+
+    let newValue3: ActivityIdTypeDict = [
+      {
+        id: 'priv_exploration',
+        type: 'exploration',
+      },
+    ];
+
+    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences(newValue3);
+
+    componentInstance.saveFeaturedActivityReferences();
+
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Exploration IDs are private: priv_exploration. Please enter a different ID.'
+    );
+
+    let newValue4: ActivityIdTypeDict = [
+      {
+        id: 'priv_collection',
+        type: 'collection',
+      },
+    ];
+
+    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences(newValue4);
+
+    componentInstance.saveFeaturedActivityReferences();
+
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Collection IDs are private: priv_collection. Please enter a different ID.'
+    );
+  }));
 });

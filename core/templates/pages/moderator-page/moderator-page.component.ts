@@ -83,7 +83,6 @@ export class ModeratorPageComponent {
     if (this.displayedFeaturedActivityReferences !== newValue) {
       this.displayedFeaturedActivityReferences = newValue;
       this.changeDetectorRef.detectChanges();
-      console.log(newValue);
     }
   }
 
@@ -148,6 +147,8 @@ export class ModeratorPageComponent {
 
   isSaveFeaturedActivitiesButtonDisabled(): boolean {
     for (let reference of this.displayedFeaturedActivityReferences) {
+      //If the input field is blank, isSaveFeaturedActivitiesButtonDisabled
+      //is set to true.
       if (reference.id.trim() === '') {
         return true;
       } else {
@@ -168,6 +169,17 @@ export class ModeratorPageComponent {
       .then(() => {
         this.lastSavedFeaturedActivityReferences = activityReferencesToSave;
         this.alertsService.addSuccessMessage('Featured activities saved.');
+      })
+      //Catches 400 error returned from backend and displays the custom
+      //and corresponding error message.
+      .catch(error => {
+        if (error.status === 400 && error.error) {
+          this.alertsService.addWarning(error.error.error);
+        } else {
+          this.alertsService.addWarning(
+            'An unexpected error occurred. Please try again later.'
+          );
+        }
       });
   }
 
