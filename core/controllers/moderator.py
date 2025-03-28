@@ -78,59 +78,56 @@ class FeaturedActivitiesHandler(
             'featured_activity_reference_dicts']
 
         try:
-            #Retrieve the list for each type of inavlid ID
-            dne_explorations = summary_services.require_activities_to_be_public(
+            # Retrieve the list for each type of inavlid ID.
+            dne_exp = summary_services.require_activities_to_be_public(
                 featured_activity_references)[0]
-            dne_collections = summary_services.require_activities_to_be_public(
+            dne_col = summary_services.require_activities_to_be_public(
                 featured_activity_references)[1]
-            private_explorations = summary_services.require_activities_to_be_public(
+            priv_exp = summary_services.require_activities_to_be_public(
                 featured_activity_references)[2]
-            private_collections = summary_services.require_activities_to_be_public(
+            priv_col = summary_services.require_activities_to_be_public(
                 featured_activity_references)[3]
 
-            #If all of the lists are empty, there are no invalid IDs
-            if ((dne_explorations == []) & (dne_collections == []) & 
-                (private_explorations == []) & (private_collections == [])):
+            # If all of the lists are empty, there are no invalid IDs.
+            if ((not dne_exp) & (not dne_col) &
+                (not priv_exp) & (not priv_col)):
                 activity_services.update_featured_activity_references(
                     featured_activity_references)
                 self.render_json({})
             else:
 
-                error_message = ""
+                error_message = ''
 
-                #If there are IDs for non-existent Explorations
-                if dne_explorations:
-                    for id in dne_explorations:
-                        error = "These Exploration IDs do not exist: " + ", ".join(dne_explorations) + ". "
+                # If there are IDs for non-existent Explorations.
+                if dne_exp:
+                    for id in dne_exp:
+                        error = f'These Exploration IDs do not exist: {dne_exp}. '
                     error_message = error_message + error
 
-                #If there are IDs for non-existent Collections
-                if dne_collections:
-                    for id in dne_collections:
-                        error = "These Collection IDs do not exist: " + ", ".join(dne_collections) + ". "
-                    error_message = error_message + error
-                
-                #If there are IDs for private Explorations
-                if private_explorations:
-                    for id in private_explorations:
-                        error = "These Exploration IDs are private: " + ", ".join(private_explorations) + ". "
+                # If there are IDs for non-existent Collections.
+                if dne_col:
+                    for id in dne_col:
+                        error = f'These Collection IDs do not exist: {dne_col}. '
                     error_message = error_message + error
 
-                #If there are IDs for private Collections
-                if private_collections:
-                    for id in private_collections:
-                        error = "These Collection IDs are private: " + ", ".join(private_collections) + ". "
+                # If there are IDs for private Explorations.
+                if priv_exp:
+                    for id in priv_exp:
+                        error = f'These Exploration IDs are private: {priv_exp}. '
                     error_message = error_message + error
 
-                error_message = error_message + "Please enter a different ID."
+                # If there are IDs for private Collections.
+                if priv_col:
+                    for id in priv_col:
+                        error = f'These Collection IDs are private: {priv_col}. '
+                    error_message = error_message + error
+
+                error_message = error_message + 'Please enter a different ID.'
 
                 raise self.InvalidInputException(error_message)
 
         except Exception as e:
             raise self.InvalidInputException(e)
-
-        
-
 
 class EmailDraftHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
     """Provide default email templates for moderator emails."""

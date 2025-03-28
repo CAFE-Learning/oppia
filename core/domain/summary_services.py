@@ -723,31 +723,33 @@ def require_activities_to_be_public(
 
     dne_explorations = []
     dne_collections = []
-    private_explorations = []
-    private_collections = []
+    priv_explorations = []
+    priv_collections = []
 
     for activities_info in activity_summaries_by_type:
 
-        #If the activity is an Exploration
+        #If the activity is an Exploration.
         if activities_info['type'] == constants.ACTIVITY_TYPE_EXPLORATION:
             for index, summary in enumerate(activities_info['summaries']):
-                #If there's no summary for the Exploration ID, it means it doesn't exist
+                # If there's no summary for the Exploration ID,
+                # it means it doesn't exist.
                 if summary is None:
                     dne_explorations.append(activities_info['ids'][index])
-                #If the Exploration is set to private
+                # If the Exploration is set to private.
                 elif summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
-                    private_explorations.append(activities_info['ids'][index])
-        #If the activity isn't an Exploration, it's a Collection
+                    priv_explorations.append(activities_info['ids'][index])
+        # If the activity isn't an Exploration, it's a Collection.
         else:
             for index, summary in enumerate(activities_info['summaries']):
-                #If there's no summary for the Collection ID, it means it doesn't exist
+                # If there's no summary for the Collection ID, 
+                # it means it doesn't exist.
                 if summary is None:
                     dne_collections.append(activities_info['ids'][index])
-                #If the Collection is set to private
+                #If the Collection is set to private.
                 elif summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
-                    private_collections.append(activities_info['ids'][index])
+                    priv_collections.append(activities_info['ids'][index])
 
-    return dne_explorations, dne_collections, private_explorations, private_collections
+    return dne_explorations, dne_collections, priv_explorations, priv_collections
 
 
 def get_featured_activity_summary_dicts(
