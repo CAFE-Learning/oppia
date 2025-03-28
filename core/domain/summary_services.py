@@ -721,35 +721,35 @@ def require_activities_to_be_public(
             collection_ids),
     }]
 
-    dne_explorations = []
-    dne_collections = []
-    priv_explorations = []
-    priv_collections = []
+    dne_exp = []
+    dne_col = []
+    priv_exp = []
+    priv_col = []
 
     for activities_info in activity_summaries_by_type:
 
-        #If the activity is an Exploration.
+        # If the activity is an Exploration.
         if activities_info['type'] == constants.ACTIVITY_TYPE_EXPLORATION:
             for index, summary in enumerate(activities_info['summaries']):
                 # If there's no summary for the Exploration ID,
                 # it means it doesn't exist.
                 if summary is None:
-                    dne_explorations.append(activities_info['ids'][index])
+                    dne_exp.append(activities_info['ids'][index])
                 # If the Exploration is set to private.
                 elif summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
-                    priv_explorations.append(activities_info['ids'][index])
+                    priv_exp.append(activities_info['ids'][index])
         # If the activity isn't an Exploration, it's a Collection.
         else:
             for index, summary in enumerate(activities_info['summaries']):
-                # If there's no summary for the Collection ID, 
+                # If there's no summary for the Collection ID,
                 # it means it doesn't exist.
                 if summary is None:
-                    dne_collections.append(activities_info['ids'][index])
-                #If the Collection is set to private.
+                    dne_col.append(activities_info['ids'][index])
+                # If the Collection is set to private.
                 elif summary.status == rights_domain.ACTIVITY_STATUS_PRIVATE:
-                    priv_collections.append(activities_info['ids'][index])
+                    priv_col.append(activities_info['ids'][index])
 
-    return dne_explorations, dne_collections, priv_explorations, priv_collections
+    return dne_exp, dne_col, priv_exp, priv_col
 
 
 def get_featured_activity_summary_dicts(

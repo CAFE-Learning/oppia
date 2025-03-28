@@ -124,7 +124,8 @@ class FeaturedActivitiesHandler(
 
         except Exception as e:
             raise self.InvalidInputException(e)
- 
+
+
 class EmailDraftHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
     """Provide default email templates for moderator emails."""
 
