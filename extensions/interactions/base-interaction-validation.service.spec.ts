@@ -90,7 +90,7 @@ describe('BaseInteractionValidationService', () => {
       );
       expect(warnings.length).toBe(1);
       expect(warnings[0].message).toContain(
-        'Please specify what Oppia should do in Oppia response 1.'
+        'Please specify what Oppia should do in Oppia response 1'
       );
     });
 
@@ -112,7 +112,7 @@ describe('BaseInteractionValidationService', () => {
       );
       expect(warnings.length).toBe(1);
       expect(warnings[0].message).toContain(
-        'In answer group 1, self-loops should not be labelled as correct.'
+        'In answer group 1, self-loops should not be labelled as correct'
       );
     });
 
@@ -134,7 +134,7 @@ describe('BaseInteractionValidationService', () => {
       );
       expect(warnings.length).toBe(1);
       expect(warnings[0].message).toContain(
-        "The answer group 1 is labelled as 'correct', but includes a 'destination for really stuck learners'. The latter is unnecessary and should be removed."
+        "The answer group 1 is labelled as 'correct', but includes a 'destination for really stuck learners'. The latter is unnecessary and should be removed"
       );
     });
   });
@@ -153,7 +153,7 @@ describe('BaseInteractionValidationService', () => {
       );
       expect(warnings.length).toBe(1);
       expect(warnings[0].message).toContain(
-        'Please add feedback for the user in the [All other answers] rule.'
+        'Please add feedback for the user in the [All other answers] rule'
       );
     });
 
@@ -170,7 +170,7 @@ describe('BaseInteractionValidationService', () => {
       );
       expect(warnings.length).toBe(1);
       expect(warnings[0].message).toContain(
-        'In the [All other answers] group, self-loops should not be labelled as correct.'
+        'In the [All other answers] group, self-loops should not be labelled as correct'
       );
     });
   });
