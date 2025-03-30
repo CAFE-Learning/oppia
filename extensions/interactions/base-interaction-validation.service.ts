@@ -75,7 +75,7 @@ export class BaseInteractionValidationService {
           type: AppConstants.WARNING_TYPES.ERROR,
           message:
             'Please specify what Oppia should do in Oppia response ' +
-            `${groupId}.`,
+            `${groupId}`,
         });
       }
       if (
@@ -87,7 +87,7 @@ export class BaseInteractionValidationService {
           type: AppConstants.WARNING_TYPES.ERROR,
           message:
             `In answer group ${groupId}, self-loops should ` +
-            'not be labelled as correct.',
+            'not be labelled as correct',
         });
       }
       if (
@@ -99,7 +99,7 @@ export class BaseInteractionValidationService {
           message:
             `The answer group ${groupId} is labelled as 'correct', ` +
             "but includes a 'destination for really stuck learners'. " +
-            'The latter is unnecessary and should be removed.',
+            'The latter is unnecessary and should be removed',
         });
       }
     }
@@ -116,7 +116,7 @@ export class BaseInteractionValidationService {
         type: AppConstants.WARNING_TYPES.ERROR,
         message:
           'Please add feedback for the user in the [All other answers] ' +
-          'rule.',
+          'rule',
       });
     }
     if (
@@ -129,7 +129,7 @@ export class BaseInteractionValidationService {
         type: AppConstants.WARNING_TYPES.ERROR,
         message:
           'In the [All other answers] group, self-loops should not be ' +
-          'labelled as correct.',
+          'labelled as correct',
       });
     }
     return partialWarningsList;
