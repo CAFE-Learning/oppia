@@ -692,7 +692,7 @@ def get_library_groups(language_codes: List[str]) -> List[LibraryGroupDict]:
     return results
 
 
-def require_activities_to_be_public(
+def check_activity_id_validity(
     activity_references: List[activity_domain.ActivityReference]
 ) -> None:
     """Returns four lists of each type of invalid Activity ID.
