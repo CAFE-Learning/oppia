@@ -78,49 +78,49 @@ class FeaturedActivitiesHandler(
             'featured_activity_reference_dicts']
 
         try:
-         # Retrieve the list for each type of inavlid ID.
-         dne_exp = summary_services.check_activity_id_validity(
-            featured_activity_references)[0]
-         dne_col = summary_services.check_activity_id_validity(
-            featured_activity_references)[1]
-         priv_exp = summary_services.check_activity_id_validity(
-            featured_activity_references)[2]
-         priv_col = summary_services.check_activity_id_validity(
-            featured_activity_references)[3]
+            # Retrieve the list for each type of inavlid ID.
+            dne_exp = summary_services.check_activity_id_validity(
+                featured_activity_references)[0]
+            dne_col = summary_services.check_activity_id_validity(
+                featured_activity_references)[1]
+            priv_exp = summary_services.check_activity_id_validity(
+                featured_activity_references)[2]
+            priv_col = summary_services.check_activity_id_validity(
+                featured_activity_references)[3]
 
-         # If all of the lists are empty, there are no invalid IDs.
-         if ((not dne_exp) & (not dne_col) &
-          (not priv_exp) & (not priv_col)):
-          activity_services.update_featured_activity_references(
-           featured_activity_references)
-          self.render_json({})
-         else:
+            # If all of the lists are empty, there are no invalid IDs.
+            if ((not dne_exp) & (not dne_col) &
+                (not priv_exp) & (not priv_col)):
+                activity_services.update_featured_activity_references(
+                featured_activity_references)
+                self.render_json({})
+            else:
 
-          error_message = ''
+                error_message = ''
 
-          # If there are IDs for non-existent Explorations.
-          if dne_exp:
-           error = f'These Exploration IDs do not exist: {", ".join(str(id) for id in dne_exp)}. '
-           error_message = error_message + error
+                # If there are IDs for non-existent Explorations.
+                if dne_exp:
+                    error = f'These Exploration IDs do not exist: {", ".join(str(id) for id in dne_exp)}. '
+                    error_message = error_message + error
 
-          # If there are IDs for non-existent Collections.
-          if dne_col:
-           error = f'These Collection IDs do not exist: {", ".join(str(id) for id in dne_col)}. '
-           error_message = error_message + error
+                # If there are IDs for non-existent Collections.
+                if dne_col:
+                    error = f'These Collection IDs do not exist: {", ".join(str(id) for id in dne_col)}. '
+                    error_message = error_message + error
 
-          # If there are IDs for private Explorations.
-          if priv_exp:
-           error = f'These Exploration IDs are private: {", ".join(str(id) for id in priv_exp)}. '
-           error_message = error_message + error
+                # If there are IDs for private Explorations.
+                if priv_exp:
+                    error = f'These Exploration IDs are private: {", ".join(str(id) for id in priv_exp)}. '
+                    error_message = error_message + error
 
-          # If there are IDs for private Collections.
-          if priv_col:
-           error = f'These Collection IDs are private: {", ".join(str(id) for id in priv_col)}. '
-           error_message = error_message + error
+                # If there are IDs for private Collections.
+                if priv_col:
+                    error = f'These Collection IDs are private: {", ".join(str(id) for id in priv_col)}. '
+                    error_message = error_message + error
 
-          error_message = f'{error_message}Please enter a different ID.'
+                error_message = f'{error_message}Please enter a different ID.'
 
-          raise self.InvalidInputException(error_message)
+                raise self.InvalidInputException(error_message)
 
         except Exception as e:
          raise self.InvalidInputException(e)
