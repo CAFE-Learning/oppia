@@ -100,22 +100,34 @@ class FeaturedActivitiesHandler(
 
                 # If there are IDs for non-existent Explorations.
                 if dne_exp:
-                    error = f'These Exploration IDs do not exist: {", ".join(str(id) for id in dne_exp)}. '
+                    error = (
+                        f'These Exploration IDs do not exist: '
+                        f'{", ".join(str(id) for id in dne_exp)}. '
+                    )
                     error_message = error_message + error
 
                 # If there are IDs for non-existent Collections.
                 if dne_col:
-                    error = f'These Collection IDs do not exist: {", ".join(str(id) for id in dne_col)}. '
+                    error = (
+                        f'These Collection IDs do not exist: '
+                        f'{", ".join(str(id) for id in dne_col)}. '
+                    )
                     error_message = error_message + error
 
                 # If there are IDs for private Explorations.
                 if priv_exp:
-                    error = f'These Exploration IDs are private: {", ".join(str(id) for id in priv_exp)}. '
+                    error = (
+                        f'These Exploration IDs are private: '
+                        f'{", ".join(str(id) for id in priv_exp)}. '
+                    )
                     error_message = error_message + error
 
                 # If there are IDs for private Collections.
                 if priv_col:
-                    error = f'These Collection IDs are private: {", ".join(str(id) for id in priv_col)}. '
+                    error = (
+                        f'These Collection IDs are private: '
+                        f'{", ".join(str(id) for id in priv_col)}. '
+                    )
                     error_message = error_message + error
 
                 error_message = f'{error_message}Please enter a different ID.'
@@ -123,7 +135,7 @@ class FeaturedActivitiesHandler(
                 raise self.InvalidInputException(error_message)
 
         except Exception as e:
-         raise self.InvalidInputException(e)
+            raise self.InvalidInputException(e)
 
 
 class EmailDraftHandler(base.BaseHandler[Dict[str, str], Dict[str, str]]):
