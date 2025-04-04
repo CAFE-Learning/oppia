@@ -19,7 +19,6 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {AppConstants} from 'app.constants';
 import {ThreadMessage} from 'domain/feedback_message/ThreadMessage.model';
-import isEqual from 'lodash/isEqual';
 import {AlertsService} from 'services/alerts.service';
 import {DateTimeFormatService} from 'services/date-time-format.service';
 import {LoaderService} from 'services/loader.service';
