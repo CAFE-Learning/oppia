@@ -31,6 +31,7 @@ export class HintAndSolutionModalService {
   displayHintModal(index: number): NgbModalRef {
     let modalRef: NgbModalRef = this.ngbModal.open(DisplayHintModalComponent, {
       backdrop: 'static',
+      centered: true,
     });
     modalRef.componentInstance.index = index;
     return modalRef;
