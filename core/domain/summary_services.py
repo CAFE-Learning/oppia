@@ -703,8 +703,8 @@ def check_activity_id_validity(
 
     Returns:
         List[str]. Each type of invalid Activity ID has its own list
-            in order for moderator.py to determine which Activity ID
-            is invalid and why.
+        in order for moderator.py to determine which Activity ID
+        is invalid and why.
     """
     exploration_ids, collection_ids = activity_services.split_by_type(
         activity_references)
