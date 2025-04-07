@@ -923,11 +923,11 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
         self
     ) -> None:
         with self.assertRaisesRegex(Exception, 'non-existent exploration'):
-            summary_services.require_activities_to_be_public([
+            summary_services.check_activity_id_validity([
                 activity_domain.ActivityReference(
                     constants.ACTIVITY_TYPE_EXPLORATION, 'fake')])
         with self.assertRaisesRegex(Exception, 'non-existent collection'):
-            summary_services.require_activities_to_be_public([
+            summary_services.check_activity_id_validity([
                 activity_domain.ActivityReference(
                     constants.ACTIVITY_TYPE_COLLECTION, 'fake')])
 
@@ -940,11 +940,11 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
             self.COL_ID_2, self.owner_id, exploration_id=self.EXP_ID_0)
 
         with self.assertRaisesRegex(Exception, 'private exploration'):
-            summary_services.require_activities_to_be_public([
+            summary_services.check_activity_id_validity([
                 activity_domain.ActivityReference(
                     constants.ACTIVITY_TYPE_EXPLORATION, self.EXP_ID_0)])
         with self.assertRaisesRegex(Exception, 'private collection'):
-            summary_services.require_activities_to_be_public([
+            summary_services.check_activity_id_validity([
                 activity_domain.ActivityReference(
                     constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)])
 
@@ -957,7 +957,7 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
         rights_manager.publish_collection(self.owner, self.COL_ID_2)
 
         # There are no validation errors.
-        summary_services.require_activities_to_be_public([
+        summary_services.check_activity_id_validity([
             activity_domain.ActivityReference(
                 constants.ACTIVITY_TYPE_EXPLORATION, self.EXP_ID_0),
             activity_domain.ActivityReference(

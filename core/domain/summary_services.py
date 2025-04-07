@@ -694,7 +694,7 @@ def get_library_groups(language_codes: List[str]) -> List[LibraryGroupDict]:
 
 def check_activity_id_validity(
     activity_references: List[activity_domain.ActivityReference]
-) -> None:
+) -> Tuple[List[str], List[str], List[str], List[str]]:
     """Returns four lists of each type of invalid Activity ID.
 
     Args:
