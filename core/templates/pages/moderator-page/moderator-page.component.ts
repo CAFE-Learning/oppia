@@ -147,7 +147,7 @@ export class ModeratorPageComponent {
   isSaveFeaturedActivitiesButtonDisabled(): boolean {
     // Declare new variable as true so that the button is disabled
     // initially.
-    var isDisabled: boolean = true;
+    this.isDisabled = true;
     for (let reference of this.displayedFeaturedActivityReferences) {
       // If the [id] input field is blank, isDiasabled is kept as true which will
       // be returned and continue to disable the Save Feature Activities
