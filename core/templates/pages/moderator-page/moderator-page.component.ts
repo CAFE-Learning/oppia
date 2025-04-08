@@ -145,15 +145,23 @@ export class ModeratorPageComponent {
   }
 
   isSaveFeaturedActivitiesButtonDisabled(): boolean {
+    // Declare new variable as true so that the button is disabled
+    // initially.
+    var isDisabled: boolean = true;
     for (let reference of this.displayedFeaturedActivityReferences) {
-      // If the input field is blank, isSaveFeaturedActivitiesButtonDisabled
-      // is set to true.
+      // If the [id] input field is blank, isDiasabled is kept as true which will
+      // be returned and continue to disable the Save Feature Activities
+      // button.
       if (reference.id.trim() === '') {
-        return true;
+        this.isDisabled = true;
+        // When something is typed into the [id] input, isDisabled is set as
+        // false, which is then returned making the Save Feature Activities
+        // button no longer disabled.
       } else {
-        return false;
+        this.isDisabled = false;
       }
     }
+    return this.isDisabled;
   }
 
   saveFeaturedActivityReferences(): void {
