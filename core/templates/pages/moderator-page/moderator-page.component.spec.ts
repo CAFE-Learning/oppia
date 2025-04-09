@@ -213,14 +213,12 @@ describe('Moderator Page Component', () => {
   });
 
   it('should tell if save featured activies button is disabled', () => {
-    componentInstance.displayedFeaturedActivityReferences =
-      componentInstance.lastSavedFeaturedActivityReferences;
+    componentInstance.displayedFeaturedActivityReferences = [];
     expect(
       componentInstance.isSaveFeaturedActivitiesButtonDisabled()
     ).toBeTrue();
-    componentInstance.displayedFeaturedActivityReferences = [];
-    componentInstance.lastSavedFeaturedActivityReferences = [
-      {id: 'not', type: 'equal'},
+    componentInstance.displayedFeaturedActivityReferences = [
+      {id: 'is', type: 'not'},
     ];
     expect(
       componentInstance.isSaveFeaturedActivitiesButtonDisabled()
