@@ -6,22 +6,35 @@
 </div>
 
 <div class="modal-body">
-  <span>
-    <oppia-rte-output-display class="oppia-learner-hint-and-solution-modal-body"
+  <button class="left-arrow"> < </button>
+  <button class="right-arrow"> > </button>
+  <div class = "sp">
+     <oppia-rte-output-display class="oppia-learner-hint-and-solution-modal-body"
                               [rteString]="hint.html">
     </oppia-rte-output-display>
-  </span>
+    
+  </div>
 </div>
-<div class = "p">
-  <button class="oppia-learner-got-it-button e2e-test-learner-got-it-button md-button md-default-theme"
+<button class="oppia-learner-got-it-button e2e-test-learner-got-it-button md-button md-default-theme"
         (click)="closeModal()">
   <span [innerHTML]="'I18N_GOT_IT' | translate"></span>
 </button>
-</div>
   
 <span class="clearfix"></span>
 
 <style>
+  .left-arrow{
+    float: left;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+  }
+  .right-arrow{
+    float: right;
+    background: none;
+    border: none;
+    font-size: 2.5rem;
+  }
   .bt{
      position: absolute;
     top: 0.5rem;
@@ -53,7 +66,7 @@
   }
   @media screen and (max-width: 768px) {
     .oppia-learner-got-it-button  {
-      width: 100%;
+      width: 296px;
 
     }
   }
@@ -61,12 +74,18 @@
 
 
   .oppia-learner-hint-and-solution-modal-body {
-    word-wrap: break-word;
+    text-align: center;
+   
+   
   }
-
+  .sp{
+    border: 2px solid yellow;
+  }
 
   .modal-body {
     max-height: calc(85vh - 125px);
     overflow-y: auto;
+    border: 2px solid darkred;
+    
   }
 </style>
