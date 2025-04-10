@@ -163,31 +163,53 @@ export class ModeratorPageComponent {
     return isDisabled;
   }
 
-  saveFeaturedActivityReferences(): void {
+  async saveFeaturedActivityReferences(): Promise<void> {
     this.alertsService.clearWarnings();
 
-    let activityReferencesToSave = [
-      ...this.displayedFeaturedActivityReferences,
-    ];
+    const activityReferencesToSave = this.displayedFeaturedActivityReferences;
 
-    this.moderatorPageBackendApiService
-      .saveFeaturedActivityReferencesAsync(activityReferencesToSave)
-      .then(() => {
-        this.lastSavedFeaturedActivityReferences = activityReferencesToSave;
-        this.alertsService.addSuccessMessage('Featured activities saved.');
-      })
-      // Catches 400 error returned from backend and displays the custom
-      // and corresponding error message.
-      .catch(error => {
-        if (error.status === 400 && error.error) {
-          this.alertsService.addWarning(error.error.error);
-        } else {
-          this.alertsService.addWarning(
-            'An unexpected error occurred. Please try again later.'
-          );
-        }
-      });
+    try {
+      await this.moderatorPageBackendApiService.saveFeaturedActivityReferencesAsync(
+        activityReferencesToSave
+      );
+      this.lastSavedFeaturedActivityReferences = activityReferencesToSave;
+      this.alertsService.addSuccessMessage('Featured activities saved.');
+    } catch (error) {
+      if (error.status === 400 && error.error) {
+        this.alertsService.addWarning(error.error.error);
+      } else {
+        this.alertsService.addWarning(
+          'An unexpected error occurred. Please try again later.'
+        );
+      }
+    }
   }
+
+  // saveFeaturedActivityReferences(): void {
+  //   this.alertsService.clearWarnings();
+
+  //   let activityReferencesToSave = [
+  //     ...this.displayedFeaturedActivityReferences,
+  //   ];
+
+  //   this.moderatorPageBackendApiService
+  //     .saveFeaturedActivityReferencesAsync(activityReferencesToSave)
+  //     .then(() => {
+  //       this.lastSavedFeaturedActivityReferences = activityReferencesToSave;
+  //       this.alertsService.addSuccessMessage('Featured activities saved.');
+  //     })
+  //     // Catches 400 error returned from backend and displays the custom
+  //     // and corresponding error message.
+  //     .catch(error => {
+  //       if (error.status === 400 && error.error) {
+  //         this.alertsService.addWarning(error.error.error);
+  //       } else {
+  //         this.alertsService.addWarning(
+  //           'An unexpected error occurred. Please try again later.'
+  //         );
+  //       }
+  //     });
+  // }
 
   getSchema(): Schema {
     return this.FEATURED_ACTIVITY_REFERENCES_SCHEMA;
