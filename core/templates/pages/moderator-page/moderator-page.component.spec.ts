@@ -230,7 +230,7 @@ describe('Moderator Page Component', () => {
   it('should save featured activity references', () => {
     spyOn(alertsService, 'clearWarnings');
     spyOn(alertsService, 'addSuccessMessage');
-    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences([]);
     componentInstance.saveFeaturedActivityReferences();
     expect(alertsService.clearWarnings).toHaveBeenCalled();
     expect(alertsService.addSuccessMessage).toHaveBeenCalled();
