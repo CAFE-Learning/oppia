@@ -256,6 +256,7 @@ describe('Moderator Page Component', () => {
   });
 
   it('should show appropriate error message for each type of invalid id', fakeAsync(() => {
+    spyOn(alertsService, 'addWarning');
     let newValue1: ActivityIdTypeDict = [
       {
         id: 'dne_exploration',
