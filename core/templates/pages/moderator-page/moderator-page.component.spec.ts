@@ -275,7 +275,7 @@ describe('Moderator Page Component', () => {
     );
   });
 
-  it('blah', fakeAsync(() => {
+  it('should blah', fakeAsync(() => {
     let newValue2: ActivityIdTypeDict = [
       {
         id: 'dne_collection',
