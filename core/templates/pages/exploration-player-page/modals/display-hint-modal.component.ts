@@ -42,7 +42,10 @@ export class DisplayHintModalComponent {
   displayedCard!: StateCard;
   recordedVoiceovers!: RecordedVoiceovers;
   hintContentId!: string;
-
+  showPrevHint: boolean = false;
+  showNextHint: boolean = false;
+  maxIndex: number = 0;
+  dots!: number[];
   constructor(
     private ngbActiveModal: NgbActiveModal,
     private audioPlayerService: AudioPlayerService,
@@ -54,9 +57,20 @@ export class DisplayHintModalComponent {
   ) {}
 
   ngOnInit(): void {
+    this.nextHintVisibility();
+    this.prevHintVisibility();
+    this.otherLogic();
+  }
+  otherLogic(): void {
     let displayHint = this.hintsAndSolutionManagerService.displayHint(
       this.index
     );
+
+    if (this.index > this.maxIndex) {
+      this.maxIndex = this.index;
+    }
+    this.dots = Array(this.maxIndex + 1);
+    console.log(this.maxIndex);
     if (displayHint === null) {
       throw new Error('Hint not found.');
     }
@@ -86,4 +100,45 @@ export class DisplayHintModalComponent {
     this.audioTranslationManagerService.clearSecondaryAudioTranslations();
     this.ngbActiveModal.dismiss('cancel');
   }
+
+  getPrevHint(): void {
+    this.index -= 1;
+
+    this.nextHintVisibility();
+    this.prevHintVisibility();
+    this.otherLogic();
+    //console.log(this.index);
+    //console.log(this.hint.html);
+  }
+  getNextHint(): void {
+    this.index += 1;
+
+    this.nextHintVisibility();
+    this.prevHintVisibility();
+    //console.log(this.index);
+    this.otherLogic();
+
+    //console.log(this.hint.html);
+  }
+  nextHintVisibility(): void {
+    //console.log("maxIndex ", this.maxIndex);
+    //console.log("Index ", this.index);
+    if (this.index < this.maxIndex) {
+      this.showNextHint = true;
+    } else {
+      this.showNextHint = false;
+    }
+  }
+  prevHintVisibility(): void {
+    //console.log(this.maxIndex);
+    console.log('maxIndex ', this.maxIndex);
+    console.log('Index ', this.index);
+    if (this.index > 0) {
+      this.showPrevHint = true;
+    } else {
+      console.log('Here ', this.index);
+      this.showPrevHint = false;
+    }
+  }
+  g;
 }

@@ -9,13 +9,13 @@
               *ngIf="hintIndex === 0 && isHintButtonVisible(hintIndex)"
               [ngClass]="{'viewed': isHintConsumed(hintIndex)}"
               (click)="displayHintModal(hintIndex)">
-        <i class="fas fa-lightbulb"></i>
+        <i>{{hintIndex+1}}</i>
       </button>
       <button class="oppia-learner-hint-solution-button md-button md-default-theme e2e-test-view-hint"
               *ngIf="hintIndex && isHintButtonVisible(hintIndex)"
               [ngClass]="{'viewed': isHintConsumed(hintIndex)}"
               (click)="displayHintModal(hintIndex)">
-        <i class="fas fa-lightbulb"></i>
+        <i>{{hintIndex+1}}</i>
       </button>
     </li>
     <li *ngIf="isSolutionButtonVisible()">

@@ -2,24 +2,33 @@
   <button type="button" class = "bt" (click)="closeModal()">&times;</button>
 </div>
 <div class="oppia-learner-hint-and-solution-modal-title">
-  <span [innerHTML]="'I18N_HINT_TITLE' | translate"></span>
+  <span [innerHTML]="'Hint ' + (index+1)"></span>
 </div>
-
 <div class="modal-body">
-  <button class="left-arrow"> < </button>
-  <button class="right-arrow"> > </button>
+  <div>
+     <button class="left-arrow" (click)="getPrevHint()" *ngIf = "showPrevHint"> < </button>
+    <button class="right-arrow" (click)="getNextHint()" *ngIf = "showNextHint"> > </button>
+  </div>
+ 
   <div class = "sp">
      <oppia-rte-output-display class="oppia-learner-hint-and-solution-modal-body"
                               [rteString]="hint.html">
     </oppia-rte-output-display>
-    
   </div>
+ 
 </div>
+ <div class="dots" *ngIf="maxIndex>0">
+   <span 
+
+      *ngFor="let dot of dots; let i = index"
+      class="dot"
+      [class.active]="i === index">
+    </span>
+  </div>
 <button class="oppia-learner-got-it-button e2e-test-learner-got-it-button md-button md-default-theme"
         (click)="closeModal()">
   <span [innerHTML]="'I18N_GOT_IT' | translate"></span>
-</button>
-  
+</button>  
 <span class="clearfix"></span>
 
 <style>
@@ -75,17 +84,37 @@
 
   .oppia-learner-hint-and-solution-modal-body {
     text-align: center;
+    transition: transform 0.4s ease-in-out;
    
    
   }
   .sp{
-    border: 2px solid yellow;
+    margin-left: 50px;
+    margin-right: 30px;
   }
 
   .modal-body {
     max-height: calc(85vh - 125px);
     overflow-y: auto;
-    border: 2px solid darkred;
     
+  }
+  .dots{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  .dot{
+    width: 12px;
+    height: 12px;
+    background-color: gray;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .dot.active{
+    background-color: dodgerblue;
   }
 </style>
