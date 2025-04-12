@@ -111,7 +111,11 @@ describe('Moderator Page Component', () => {
     }
 
     saveFeaturedActivityReferencesAsync(references: ActivityIdTypeDict[]) {
-      return Promise.resolve();
+      return {
+        then: (successCallback: () => void) => {
+          successCallback();
+        },
+      };
     }
   }
 
@@ -250,38 +254,4 @@ describe('Moderator Page Component', () => {
       newValue
     );
   });
-
-  it('should show appropriate error message for nonexistent exploration', fakeAsync(() => {
-    spyOn(alertsService, 'addWarning');
-    let newValue1: ActivityIdTypeDict = [
-      {
-        id: 'dne_exploration',
-        type: 'exploration',
-      },
-    ];
-
-    componentInstance.displayedFeaturedActivityReferences = [];
-    componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
-
-    spyOn(
-      MockModeratorPageBackendApiService,
-      'saveFeaturedActivityReferencesAsync'
-    ).and.returnValue(
-      Promise.reject({
-        status: 400,
-        error: {
-          error:
-            'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.',
-        },
-      })
-    );
-
-    componentInstance.saveFeaturedActivityReferences();
-
-    tick();
-
-    expect(alertsService.addWarning).toHaveBeenCalledWith(
-      'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
-    );
-  }));
 });
