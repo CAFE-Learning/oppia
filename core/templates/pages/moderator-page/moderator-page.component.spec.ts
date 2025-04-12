@@ -257,4 +257,47 @@ describe('Moderator Page Component', () => {
       newValue
     );
   });
+
+  it('should display error message for nonexistent exploration', () => {
+    spyOn(alertsService, 'addWarning');
+
+    let newValue: ActivityIdTypeDict[] = [
+      {
+        id: 'dne_exploration',
+        type: 'exploration',
+      },
+    ];
+
+    componentInstance.displayedFeaturedActivityReferences = [];
+    componentInstance.updateDisplayedFeaturedActivityReferences(newValue);
+
+    const mockError = {
+      status: 400,
+      error: {
+        error:
+          'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.',
+      },
+    };
+
+    spyOn(
+      componentInstance['moderatorPageBackendApiService'],
+      'saveFeaturedActivityReferencesAsync'
+    ).and.callFake(() => {
+      return {
+        then: () => {
+          return {
+            catch: (errorCallback: (err: any) => void) => {
+              errorCallback(fakeErrorResponse);
+            },
+          };
+        },
+      };
+    });
+
+    componentInstance.saveFeaturedActivityReferences();
+
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
+    );
+  });
 });
