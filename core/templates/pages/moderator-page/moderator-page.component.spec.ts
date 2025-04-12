@@ -268,13 +268,24 @@ describe('Moderator Page Component', () => {
     componentInstance.displayedFeaturedActivityReferences = [];
     componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
 
-    expect(componentInstance.displayedFeaturedActivityReferences).toEqual(
-      newValue1
+    spyOn(
+      moderatorPageBackendApiService,
+      'saveFeaturedActivityReferencesAsync'
+    ).and.returnValue(
+      Promise.reject({
+        status: 400,
+        error: {
+          error:
+            'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.',
+        },
+      })
     );
 
     componentInstance.saveFeaturedActivityReferences();
 
-    expect(alertsService.addWarning).toHaveBeenCalled();
+    expect(alertsService.addWarning).toHaveBeenCalledWith(
+      'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
+    );
   }));
 
   it('should blah', fakeAsync(() => {
