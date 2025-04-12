@@ -286,8 +286,8 @@ describe('Moderator Page Component', () => {
       return {
         then: () => {
           return {
-            catch: (errorCallback: (err: any) => void) => {
-              errorCallback(fakeErrorResponse);
+            catch: (errorCallback: (err: string) => void) => {
+              errorCallback(mockError);
             },
           };
         },
