@@ -230,7 +230,6 @@ describe('Moderator Page Component', () => {
   it('should save featured activity references', () => {
     spyOn(alertsService, 'clearWarnings');
     spyOn(alertsService, 'addSuccessMessage');
-    componentInstance.updateDisplayedFeaturedActivityReferences([]);
     componentInstance.saveFeaturedActivityReferences();
     expect(alertsService.clearWarnings).toHaveBeenCalled();
     expect(alertsService.addSuccessMessage).toHaveBeenCalled();
@@ -256,7 +255,7 @@ describe('Moderator Page Component', () => {
     );
   });
 
-  it('should show appropriate error message for nonexistent exploration', () => {
+  it('should show appropriate error message for nonexistent exploration', fakeAsync(() => {
     spyOn(alertsService, 'addWarning');
     let newValue1: ActivityIdTypeDict = [
       {
@@ -273,7 +272,7 @@ describe('Moderator Page Component', () => {
     expect(alertsService.addWarning).toHaveBeenCalledWith(
       'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
     );
-  });
+  }));
 
   it('should blah', fakeAsync(() => {
     let newValue2: ActivityIdTypeDict = [
