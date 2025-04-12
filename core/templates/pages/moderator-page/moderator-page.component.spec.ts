@@ -264,7 +264,7 @@ describe('Moderator Page Component', () => {
     componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
 
     spyOn(
-      moderatorPageBackendApiService,
+      MockModeratorPageBackendApiService,
       'saveFeaturedActivityReferencesAsync'
     ).and.returnValue(
       Promise.reject({
