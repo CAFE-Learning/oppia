@@ -280,7 +280,7 @@ describe('Moderator Page Component', () => {
     };
 
     spyOn(
-      componentInstance['moderatorPageBackendApiService'],
+      componentInstance.moderatorPageBackendApiService,
       'saveFeaturedActivityReferencesAsync'
     ).and.callFake(() => {
       return {
