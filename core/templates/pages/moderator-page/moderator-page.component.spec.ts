@@ -111,11 +111,7 @@ describe('Moderator Page Component', () => {
     }
 
     saveFeaturedActivityReferencesAsync(references: ActivityIdTypeDict[]) {
-      return {
-        then: (successCallback: () => void) => {
-          successCallback();
-        },
-      };
+      return Promise.resolve();
     }
   }
 
