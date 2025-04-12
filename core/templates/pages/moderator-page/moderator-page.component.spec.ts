@@ -269,7 +269,7 @@ describe('Moderator Page Component', () => {
     componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
 
     spyOn(
-      moderatorPageBackendApiService,
+      ModeratorPageBackendApiService,
       'saveFeaturedActivityReferencesAsync'
     ).and.returnValue(
       Promise.reject({
@@ -282,6 +282,8 @@ describe('Moderator Page Component', () => {
     );
 
     componentInstance.saveFeaturedActivityReferences();
+
+    tick();
 
     expect(alertsService.addWarning).toHaveBeenCalledWith(
       'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
