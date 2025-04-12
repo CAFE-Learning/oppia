@@ -177,7 +177,7 @@ export class ModeratorPageComponent {
         this.alertsService.addSuccessMessage('Featured activities saved.');
       })
       // Catches 400 error returned from backend and displays the custom
-      // and corresponding error message.
+      // and corresponding error message created in moderator.py.
       .catch(error => {
         if (error.status === 400 && error.error) {
           this.alertsService.addWarning(error.error.error);

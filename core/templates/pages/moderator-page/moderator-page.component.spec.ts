@@ -263,15 +263,18 @@ describe('Moderator Page Component', () => {
     componentInstance.displayedFeaturedActivityReferences = [];
     componentInstance.updateDisplayedFeaturedActivityReferences(newValue1);
 
-    componentInstance.ModeratorPageBackendApiService.saveFeaturedActivityReferencesAsync =
-      () =>
-        Promise.reject({
-          status: 400,
-          error: {
-            error:
-              'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.',
-          },
-        });
+    spyOn(
+      moderatorPageBackendApiService,
+      'saveFeaturedActivityReferencesAsync'
+    ).and.returnValue(
+      Promise.reject({
+        status: 400,
+        error: {
+          error:
+            'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.',
+        },
+      })
+    );
 
     componentInstance.saveFeaturedActivityReferences();
 
