@@ -114,6 +114,9 @@ describe('Moderator Page Component', () => {
       return {
         then: (successCallback: () => void) => {
           successCallback();
+          return {
+            catch: () => {},
+          };
         },
       };
     }
