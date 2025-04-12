@@ -79,14 +79,10 @@ class FeaturedActivitiesHandler(
 
         try:
             # Retrieve the list for each type of inavlid ID.
-            dne_exp = summary_services.check_activity_id_validity(
-                featured_activity_references)[0]
-            dne_col = summary_services.check_activity_id_validity(
-                featured_activity_references)[1]
-            priv_exp = summary_services.check_activity_id_validity(
-                featured_activity_references)[2]
-            priv_col = summary_services.check_activity_id_validity(
-                featured_activity_references)[3]
+            dne_exp, dne_col, priv_exp, priv_col = (
+                summary_services.check_activity_id_validity(
+                featured_activity_references)
+            )
 
             # If all of the lists are empty, there are no invalid IDs.
             if ((not dne_exp) & (not dne_col) &

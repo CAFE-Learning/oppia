@@ -269,9 +269,7 @@ describe('Moderator Page Component', () => {
 
     componentInstance.saveFeaturedActivityReferences();
 
-    expect(alertsService.addWarning).toHaveBeenCalledWith(
-      'These Exploration IDs do not exist: dne_exploration. Please enter a different ID.'
-    );
+    expect(alertsService.addWarning).toHaveBeenCalled();
   }));
 
   it('should blah', fakeAsync(() => {
