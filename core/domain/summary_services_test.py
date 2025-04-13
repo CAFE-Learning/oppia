@@ -922,7 +922,6 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
     def test_checking_activity_id_validity_on_nonexistent_activities(
         self
     ) -> None:
-
         dne_exp_id = 'non-existent exploration'
         dne_col_id = 'non-existent collection'
 
@@ -932,16 +931,16 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
             activity_domain.ActivityReference(
                 constants.ACTIVITY_TYPE_COLLECTION, dne_col_id)
         ]
-        
-        dne_exp, dne_col, priv_exp, priv_col = summary_services.check_activity_id_validity([
-          dne_activities  
+
+        (dne_exp, dne_col,
+            priv_exp, priv_col) = summary_services.check_activity_id_validity([
+          dne_activities
         ])
-        
+
         self.assertIn(dne_exp_id, dne_exp)
         self.assertIn(dne_col_id, dne_col)
         self.assertEqual(priv_exp, [])
         self.assertEqual(priv_col, [])
-
 
     def test_checking_activity_id_validity_on_private_activities(
         self
@@ -960,15 +959,15 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
                     constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)])
         ]
 
-        dne_exp, dne_col, priv_exp, priv_col = summary_services.check_activity_id_validity([
-          priv_activities  
+        (dne_exp, dne_col,
+            priv_exp, priv_col) = summary_services.check_activity_id_validity([
+          priv_activities
         ])
 
         self.assertEqual(dne_exp, [])
         self.assertEqual(dne_col, [])
         self.assertIn(self.EXP_ID_0, priv_exp)
         self.assertIn(self.COL_ID_2, priv_col)
-            
 
     def test_checking_activity_id_validity_on_valid_activities(self) -> None:
         self.save_new_valid_exploration(self.EXP_ID_0, self.owner_id)
@@ -985,15 +984,15 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
                 constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)
         ]
 
-        dne_exp, dne_col, priv_exp, priv_col = summary_services.check_activity_id_validity([
-          valid_activities  
+        (dne_exp, dne_col,
+            priv_exp, priv_col) = summary_services.check_activity_id_validity([
+          valid_activities
         ])
 
         self.assertEqual(dne_exp, [])
         self.assertEqual(dne_col, [])
         self.assertEqual(priv_exp, [])
         self.assertEqual(priv_col, [])
-
 
 class CollectionNodeMetadataDictsTest(
         exp_services_test.ExplorationServicesUnitTests):
