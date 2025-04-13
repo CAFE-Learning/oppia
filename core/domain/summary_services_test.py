@@ -907,7 +907,8 @@ class RecentlyPublishedExplorationDisplayableSummariesTest(
 
 
 class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
-    """Tests for checking id validity of activities that don't exist or are private."""
+    """Tests for checking id validity of activities 
+    that don't exist or are private."""
 
     EXP_ID_0: Final = 'exp_id_0'
     EXP_ID_1: Final = 'exp_id_1'
@@ -932,9 +933,10 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
                 constants.ACTIVITY_TYPE_COLLECTION, dne_col_id)
         ]
 
-        (dne_exp, dne_col,
-            priv_exp, priv_col) = summary_services.check_activity_id_validity([
-          dne_activities
+        (
+            dne_exp, dne_col, priv_exp, priv_col
+        ) = summary_services.check_activity_id_validity([
+            dne_activities
         ])
 
         self.assertIn(dne_exp_id, dne_exp)
@@ -959,9 +961,10 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
                     constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)])
         ]
 
-        (dne_exp, dne_col,
-            priv_exp, priv_col) = summary_services.check_activity_id_validity([
-          priv_activities
+        (
+            dne_exp, dne_col, priv_exp, priv_col
+        ) = summary_services.check_activity_id_validity([
+            priv_activities
         ])
 
         self.assertEqual(dne_exp, [])
@@ -984,15 +987,17 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
                 constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)
         ]
 
-        (dne_exp, dne_col,
-            priv_exp, priv_col) = summary_services.check_activity_id_validity([
-          valid_activities
+        (
+            dne_exp, dne_col, priv_exp, priv_col
+        ) = summary_services.check_activity_id_validity([
+            valid_activities
         ])
 
         self.assertEqual(dne_exp, [])
         self.assertEqual(dne_col, [])
         self.assertEqual(priv_exp, [])
         self.assertEqual(priv_col, [])
+
 
 class CollectionNodeMetadataDictsTest(
         exp_services_test.ExplorationServicesUnitTests):
