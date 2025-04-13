@@ -935,9 +935,9 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
 
         (
             dne_exp, dne_col, priv_exp, priv_col
-        ) = summary_services.check_activity_id_validity([
+        ) = summary_services.check_activity_id_validity(
             dne_activities
-        ])
+        )
 
         self.assertIn(dne_exp_id, dne_exp)
         self.assertIn(dne_col_id, dne_col)
@@ -963,9 +963,9 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
 
         (
             dne_exp, dne_col, priv_exp, priv_col
-        ) = summary_services.check_activity_id_validity([
+        ) = summary_services.check_activity_id_validity(
             priv_activities
-        ])
+        )
 
         self.assertEqual(dne_exp, [])
         self.assertEqual(dne_col, [])
@@ -989,9 +989,9 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
 
         (
             dne_exp, dne_col, priv_exp, priv_col
-        ) = summary_services.check_activity_id_validity([
-            valid_activities
-        ])
+        ) = summary_services.check_activity_id_validity(
+          valid_activities
+        )
 
         self.assertEqual(dne_exp, [])
         self.assertEqual(dne_col, [])
