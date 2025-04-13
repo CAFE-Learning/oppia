@@ -953,12 +953,10 @@ class ActivityReferenceAccessCheckerTests(test_utils.GenericTestBase):
             self.COL_ID_2, self.owner_id, exploration_id=self.EXP_ID_0)
 
         priv_activities = [
-            summary_services.check_activity_id_validity([
                 activity_domain.ActivityReference(
-                    constants.ACTIVITY_TYPE_EXPLORATION, self.EXP_ID_0)]),
-            summary_services.check_activity_id_validity([
+                    constants.ACTIVITY_TYPE_EXPLORATION, self.EXP_ID_0),
                 activity_domain.ActivityReference(
-                    constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)])
+                    constants.ACTIVITY_TYPE_COLLECTION, self.COL_ID_2)
         ]
 
         (
