@@ -40,12 +40,14 @@ export class HintAndSolutionModalService {
   displaySolutionModal(): NgbModalRef {
     return this.ngbModal.open(DisplaySolutionModalComponent, {
       backdrop: 'static',
+      centered: true,
     });
   }
 
   displaySolutionInterstitialModal(): NgbModalRef {
     return this.ngbModal.open(DisplaySolutionInterstititalModalComponent, {
       backdrop: 'static',
+      centered: true,
     });
   }
 }

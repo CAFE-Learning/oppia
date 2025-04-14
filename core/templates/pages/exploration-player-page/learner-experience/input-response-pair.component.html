@@ -48,11 +48,49 @@
   </div>
   <span id="getInputResponsePairId()"></span>
   <div dir="auto">
-    <oppia-rte-output-display *ngIf="data.oppiaResponse !== null"
+    <oppia-rte-output-display *ngIf="data.oppiaResponse !== null && !isSolutionVisible()"
                               [rteString]="data.oppiaResponse"
                               [class]="'oppia-rte-viewer conversation-skin-oppia-feedback-content ' + (bottomSection ? 'e2e-test-conversation-feedback-latest' : '')"
                               [ngStyle]="{'min-width': (isVideoRteElementPresentInResponse() ? '75%': 'inherit')}"
                               [ngClass]="getFeedbackAudioHighlightClass()">
     </oppia-rte-output-display>
+    <div
+    *ngIf="isSolutionVisible()"
+    [class]="'oppia-rte-viewer conversation-skin-oppia-feedback-content ' + (bottomSection ? 'e2e-test-conversation-feedback-latest' : '')"
+    [ngStyle]="{'min-width': (isVideoRteElementPresentInResponse() ? '75%': 'inherit')}"
+    [ngClass]="getFeedbackAudioHighlightClass()"
+    >
+      <oppia-rte-output-display [rteString]="'If you still need help, you can try viewing the solution'">
+                              
+      </oppia-rte-output-display>
+      <button class="solution-button" (click) = "onClickSolutionButton()">View Solution</button>
+    </div>
+    
   </div>
 </div>
+<style>
+.solution-button {
+  background-color: #ef6c00; /* medium orange */
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: 20px;
+}
+
+.solution-button:hover {
+  background-color: #f57c00; /* darker on hover */
+  transform: translateY(-2px);
+}
+
+.solution-button:active {
+  background-color: #e65100;
+  transform: translateY(0);
+}
+
+</style>

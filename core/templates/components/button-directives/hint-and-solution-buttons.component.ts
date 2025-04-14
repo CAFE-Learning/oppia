@@ -156,6 +156,7 @@ export class HintAndSolutionButtonsComponent implements OnInit, OnDestroy {
           this.displaySolutionModal();
         },
         () => {
+          console.log('here');
           this.solutionModalIsActive = false;
         }
       );

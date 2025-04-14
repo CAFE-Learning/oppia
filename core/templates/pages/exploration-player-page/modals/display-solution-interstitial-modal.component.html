@@ -1,51 +1,54 @@
-<div class="oppia-learner-solution-interstitial-modal-title">
-  <span [innerHTML]="'I18N_WARNING_MODAL_TITLE' | translate"></span>
-</div>
 
 <div class="modal-body">
   <span class="oppia-learner-solution-interstitial-modal-body">
-    <span [innerHTML]="'I18N_WARNING_MODAL_DESCRIPTION' | translate"></span>
+    <span [innerHTML]="'Are you sure you want to view the solution?'"></span>
   </span>
 </div>
 
 <div class="oppia-learner-solution-container">
-  <button class="oppia-modal-cancel-button md-button md-default-theme ml-auto" (click)="cancel()">
-    <span [innerHTML]="'I18N_MODAL_CANCEL_BUTTON' | translate"></span>
-  </button>
-  <button class="oppia-learner-got-it-button e2e-test-learner-got-it-button md-button md-default-theme e2e-test-continue-to-solution-btn"
+  <button class="oppia-learner-solution-button"
           (click)="confirm()">
     <span [innerHTML]="'I18N_SHOW_SOLUTION_BUTTON' | translate"></span>
+  </button>
+  <button class="oppia-learner-solution-button"
+          (click)="cancel()">
+    <span [innerHTML]="'I18N_MODAL_CANCEL_BUTTON' | translate"></span>
   </button>
 </div>
 <span class="clearfix"></span>
 
 <style>
-  .oppia-learner-solution-interstitial-modal-title {
-    color: #00786d;
-    font-family: 'Capriola', 'Roboto', 'Arial', sans-serif;
-    font-size: 1.75em;
-    font-weight: bold;
-    padding-top: 20px;
-    text-align: center;
-  }
 
   .oppia-learner-solution-interstitial-modal-body {
     word-wrap: break-word;
   }
+  .modal-body {
+    margin-top: 70px;
+    text-align: center;
+  }
 
   .oppia-learner-solution-container {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px; 
   }
 
-  .md-button.oppia-modal-cancel-button {
-    background: #9a9a9a;
-    color: #fff;
-    height: 35px;
-    padding: 6px 12px;
+  .oppia-learner-solution-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #00786d;
+    color: white;
+    border-radius: 5px;
+    border-color: #00786d;
+    cursor: pointer;
+    min-width: 120px;
   }
-  .md-button.md-default-theme.oppia-modal-cancel-button:focus,
-  .md-button.md-default-theme.oppia-modal-cancel-button:hover {
-    background: #7a7a7a;
+
+
+  .oppia-learner-solution-button:hover {
+    background-color: white;
+    color: #00786d;
   }
+
 </style>

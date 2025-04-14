@@ -36,11 +36,15 @@ import {Interaction} from 'domain/exploration/InteractionObjectFactory';
 import {NumberConversionService} from 'services/number-conversion.service';
 import isNumber from 'lodash/isNumber';
 import isString from 'lodash/isString';
-
+import {Subscription} from 'rxjs';
 import './input-response-pair.component.css';
 import {PlatformFeatureService} from 'services/platform-feature.service';
 import {VoiceoverPlayerService} from '../services/voiceover-player.service';
-
+import {HintsAndSolutionManagerService} from 'pages/exploration-player-page/services/hints-and-solution-manager.service';
+import {HintAndSolutionModalService} from 'pages/exploration-player-page/services/hint-and-solution-modal.service';
+import {ExplorationPlayerStateService} from 'pages/exploration-player-page/services/exploration-player-state.service';
+import {ContextService} from 'services/context.service';
+import {StatsReportingService} from 'pages/exploration-player-page/services/stats-reporting.service';
 @Component({
   selector: 'oppia-input-response-pair',
   templateUrl: './input-response-pair.component.html',
@@ -60,7 +64,9 @@ export class InputResponsePairComponent {
   @Input() feedbackIsEnabled!: boolean;
   @Output() dataChange: EventEmitter<InputResponsePair> = new EventEmitter();
   @ViewChild('popover') popover!: NgbPopover;
-
+  solutionModalIsActive: boolean = false;
+  private _editorPreviewMode!: boolean;
+  directiveSubscriptions = new Subscription();
   constructor(
     private audioPlayerService: AudioPlayerService,
     private audioTranslationManagerService: AudioTranslationManagerService,
@@ -71,9 +77,19 @@ export class InputResponsePairComponent {
     private playerTranscriptService: PlayerTranscriptService,
     private numberConversionService: NumberConversionService,
     private platformFeatureService: PlatformFeatureService,
-    private voiceoverPlayerService: VoiceoverPlayerService
+    private voiceoverPlayerService: VoiceoverPlayerService,
+    private hintsAndSolutionManagerService: HintsAndSolutionManagerService,
+    private explorationPlayerStateService: ExplorationPlayerStateService,
+    private hintAndSolutionModalService: HintAndSolutionModalService,
+    private contextService: ContextService,
+    private statsReportingService: StatsReportingService
   ) {}
-
+  ngOnInit(): void {
+    this._editorPreviewMode = this.contextService.isInExplorationEditorPage();
+  }
+  ngOnDestroy(): void {
+    this.directiveSubscriptions.unsubscribe();
+  }
   isVideoRteElementPresentInResponse(): boolean {
     if (this.data.oppiaResponse) {
       return this.data.oppiaResponse.includes('oppia-noninteractive-video');
@@ -109,11 +125,46 @@ export class InputResponsePairComponent {
       this.playerPositionService.getDisplayedCardIndex()
     );
     let interaction = displayedCard.getInteraction();
+    console.log(interaction);
     return this.explorationHtmlFormatterService.getAnswerHtml(
       this.convertAnswerToLocalFormat(this.data.learnerInput as string),
       interaction.id,
       interaction.customizationArgs
     );
+  }
+  isSolutionVisible(): boolean {
+    return this.hintsAndSolutionManagerService.isSolutionViewable();
+  }
+  onClickSolutionButton(): void {
+    this.solutionModalIsActive = true;
+    if (this.hintsAndSolutionManagerService.isSolutionConsumed()) {
+      this.displaySolutionModal();
+    } else {
+      let interstitialModalPromise =
+        this.hintAndSolutionModalService.displaySolutionInterstitialModal();
+      interstitialModalPromise.result.then(
+        () => {
+          this.displaySolutionModal();
+        },
+        () => {
+          this.solutionModalIsActive = false;
+        }
+      );
+    }
+  }
+
+  displaySolutionModal(): void {
+    this.solutionModalIsActive = true;
+    let inQuestionMode = this.explorationPlayerStateService.isInQuestionMode();
+    if (!this._editorPreviewMode && !inQuestionMode) {
+      this.statsReportingService.recordSolutionHit(
+        this.playerPositionService.getCurrentStateName()
+      );
+    }
+    let promise = this.hintAndSolutionModalService.displaySolutionModal();
+    promise.result.then(null, () => {
+      this.solutionModalIsActive = false;
+    });
   }
 
   // Returns a HTML string representing a short summary of the answer
