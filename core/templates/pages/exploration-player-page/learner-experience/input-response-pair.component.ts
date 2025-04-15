@@ -125,7 +125,6 @@ export class InputResponsePairComponent {
       this.playerPositionService.getDisplayedCardIndex()
     );
     let interaction = displayedCard.getInteraction();
-    console.log(interaction);
     return this.explorationHtmlFormatterService.getAnswerHtml(
       this.convertAnswerToLocalFormat(this.data.learnerInput as string),
       interaction.id,
