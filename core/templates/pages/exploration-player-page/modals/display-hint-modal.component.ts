@@ -70,7 +70,6 @@ export class DisplayHintModalComponent {
       this.maxIndex = this.index;
     }
     this.dots = Array(this.maxIndex + 1);
-    console.log(this.maxIndex);
     if (displayHint === null) {
       throw new Error('Hint not found.');
     }
@@ -107,22 +106,14 @@ export class DisplayHintModalComponent {
     this.nextHintVisibility();
     this.prevHintVisibility();
     this.otherLogic();
-    //console.log(this.index);
-    //console.log(this.hint.html);
   }
   getNextHint(): void {
     this.index += 1;
-
     this.nextHintVisibility();
     this.prevHintVisibility();
-    //console.log(this.index);
     this.otherLogic();
-
-    //console.log(this.hint.html);
   }
   nextHintVisibility(): void {
-    //console.log("maxIndex ", this.maxIndex);
-    //console.log("Index ", this.index);
     if (this.index < this.maxIndex) {
       this.showNextHint = true;
     } else {
@@ -130,15 +121,10 @@ export class DisplayHintModalComponent {
     }
   }
   prevHintVisibility(): void {
-    //console.log(this.maxIndex);
-    console.log('maxIndex ', this.maxIndex);
-    console.log('Index ', this.index);
     if (this.index > 0) {
       this.showPrevHint = true;
     } else {
-      console.log('Here ', this.index);
       this.showPrevHint = false;
     }
   }
-  g;
 }
