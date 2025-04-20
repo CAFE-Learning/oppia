@@ -39,6 +39,7 @@ import {NumberConversionService} from 'services/number-conversion.service';
 import {By} from '@angular/platform-browser';
 import {PlatformFeatureService} from 'services/platform-feature.service';
 import {VoiceoverPlayerService} from '../services/voiceover-player.service';
+import {ExplorationPlayerStateService} from 'pages/exploration-player-page/services/exploration-player-state.service';
 
 class MockPlatformFeatureService {
   get status(): object {
@@ -76,6 +77,10 @@ describe('InputResponsePairComponent', () => {
         {
           provide: PlatformFeatureService,
           useClass: MockPlatformFeatureService,
+        },
+        {
+          provide: ExplorationPlayerStateService,
+          useValue: {},
         },
         NgbPopover,
       ],
